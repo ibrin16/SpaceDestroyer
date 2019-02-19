@@ -1,0 +1,120 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyMovement : MonoBehaviour
+{
+    // need to know who can jump and who cant
+    // need to only go towards enemy if inside the collider
+    private bool move;
+    public bool jump;
+    public float speed;
+
+    public PlayerInteraction player;
+    private Rigidbody2D rgbd;
+
+    public int health;
+    public int damage;
+    public LayerMask playerLayerMask;
+    public Sprite[] sprites;
+    public float waitTime;
+    private float time=0;
+    private int currentSprite;
+
+    private SpriteRenderer sp;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rgbd = GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector2 direction = new Vector2(5, 0);
+        Vector2 directionBack = new Vector2(-5, 0);
+        RaycastHit2D hitForward = Physics2D.Raycast(transform.position, direction, direction.magnitude, playerLayerMask);
+        RaycastHit2D hitBack = Physics2D.Raycast(transform.position, directionBack, directionBack.magnitude, playerLayerMask);
+
+        if (hitForward.collider != null || hitBack.collider != null)
+        {
+            move = true;
+        }
+
+        // shoot a ray cast for move
+        if (move)
+        {
+            float deltaX = 0;
+            float deltaY = 0;
+            if(player.transform.position.x < transform.position.x)
+            {
+                deltaX = -1;
+            }
+            if (player.transform.position.x > transform.position.x)
+            {
+                deltaX = 1;
+            }
+            rgbd.velocity = new Vector3(deltaX, deltaY, 0);
+        }
+
+        // animation
+        if(rgbd.velocity.x < 0)
+        {
+            sp.flipX = false;
+            time += Time.deltaTime;
+
+            if (time >= waitTime)
+            {
+                currentSprite = (currentSprite + 1) % sprites.Length;
+                sp.sprite = sprites[currentSprite];
+                time = 0;
+            }
+        }
+        if (rgbd.velocity.x > 0)
+        {
+            sp.flipX = true;
+            time += Time.deltaTime;
+
+            if (time >= waitTime)
+            {
+                currentSprite = (currentSprite + 1) % sprites.Length;
+                sp.sprite = sprites[currentSprite];
+                time = 0;
+            }
+        }
+
+
+
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            player.Hit(damage);
+        }
+        if (collision.CompareTag("Laser"))
+        {
+            Hit(1);
+        }
+        if (collision.CompareTag("Ball"))
+        {
+            Hit(2);
+        }
+        if (collision.CompareTag("RPG")){
+            Hit(5);
+        }
+    }
+    private void Hit(int damage)
+    {
+        health -= damage;
+        if(health == 0)
+        {
+            Destroy(gameObject);
+        }
+    }   
+
+
+}
