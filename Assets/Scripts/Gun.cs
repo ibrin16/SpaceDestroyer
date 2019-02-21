@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    // this is the basic parent for all the guns
     // need to know ammo, fire rate, mag size, mag increase size
     // and how to fire
+    public static Gun instance;
     public int ammo;
     public int clipAmmo;
     public float fireRate;
@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     public bool auto;
 
     public Projectile shotPrefab;
-    public PlayerController player;
+    //public PlayerController player;
    // public SpriteRenderer sp;
     public Sprite[] difGuns;
     private int fireType; //0 is pistol 1 is shotgun
@@ -24,6 +24,11 @@ public class Gun : MonoBehaviour
 
     //public PlayerController player;
     protected SpriteRenderer sp;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,110 +41,103 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.gunsOn[0])
+        if (PlayerController.instance.gunsOn[0])
         {
+            // i think this is the problem
             equiped = true;
         }
-        // check for mouse then fire
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
+        
         // equip the pistol
         // what if just had one object that changed sprites and shooting style
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (PlayerController.instance.equipedGun != null)
         {
-            if (player.gunsOn[0])
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                if (player.equipedGun != null)
+                if (PlayerController.instance.gunsOn[0])
                 {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[0];
-                    // and change the fire type
-                    fireType = 0;
-                    auto = false;
+                    
+                        // change the sprite of the gun
+                        sp.sprite = difGuns[0];
+                        // and change the fire type
+                        fireType = 0;
+                        auto = false;
+                    
                 }
             }
+            // equip the shotgun
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                if (PlayerController.instance.gunsOn[1])
+                {
+                   
+                        // change the sprite of the gun
+                        sp.sprite = difGuns[1];
+                        // and change the fire type
+                        fireType = 1;
+                        auto = false;
+                    
+                }
+
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (PlayerController.instance.gunsOn[2])
+                {
+                    
+                        // change the sprite of the gun
+                        sp.sprite = difGuns[2];
+                        // and change the fire type
+                        fireType = 2;
+                        auto = true;
+                    
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                if (PlayerController.instance.gunsOn[3])
+                {
+                    
+                        // change the sprite of the gun
+                        sp.sprite = difGuns[3];
+                        // and change the fire type
+                        fireType = 3;
+                        auto = true;
+                    
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                if (PlayerController.instance.gunsOn[4])
+                {
+                    
+                        // change the sprite of the gun
+                        sp.sprite = difGuns[4];
+                        // and change the fire type
+                        fireType = 4;
+                        auto = false;
+                    
+                }
+            }
+         
         }
-        // equip the shotgun
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            if (player.gunsOn[1])
-            {
-                if (player.equipedGun != null)
-                {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[1];
-                    // and change the fire type
-                    fireType = 1;
-                    auto = false;
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (player.gunsOn[2])
-            {
-                if (player.equipedGun != null)
-                {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[2];
-                    // and change the fire type
-                    fireType = 2;
-                    auto = true;
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (player.gunsOn[3])
-            {
-                if (player.equipedGun != null)
-                {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[3];
-                    // and change the fire type
-                    fireType = 3;
-                    auto = true;
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            if (player.gunsOn[4])
-            {
-                if (player.equipedGun != null)
-                {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[4];
-                    // and change the fire type
-                    fireType = 4;
-                    auto = false;
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (player.gunsOn[1])
-            {
-                if (player.equipedGun != null)
-                {
-                    // change the sprite of the gun
-                    sp.sprite = difGuns[1];
-                    // and change the fire type
-                    fireType = 1;
-                    auto = false;
-                }
-            }
+            //print("wtf is going on");
         }
 
 
     }
 
+
     public void Fire()
     {
-        if(clipAmmo > 0 && equiped)
+        //print("here");
+        print(equiped);
+        print(clipAmmo);
+        if(equiped)
         {
+            print("here");
             if (auto)
             {
                 Autofire();
@@ -153,13 +151,17 @@ public class Gun : MonoBehaviour
       
     }
 
+    // auto fire will be the same as single fire but instead of just once per click as long as it is held down
+    // also need to factor in fire rate
     public void Autofire()
     {
 
     }
-    
+
+    // this needs to go in the correct direction
     public void Singlefire()
     {
+        print("here");
         Vector3 start = new Vector3(transform.position.x + 3, transform.position.y, 0);
         Projectile shot = Instantiate(shotPrefab, start, Quaternion.identity);
         //shot.direction = GetMouseWorldPosition();

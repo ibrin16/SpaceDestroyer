@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     public float speed;
     private SpriteRenderer sp;
     public Sprite[] sprites;
@@ -13,15 +14,16 @@ public class PlayerController : MonoBehaviour
     private float switchTime = 0;
     public float deltaX = 0;
 
-    public Gun[] allGuns;
+    //public Gun[] allGuns;
     public Gun equipedActualGun;
-    public float endJumpTime;
-    private float jumpTime = 0;
 
     public bool[] gunsOn;
     public GameObject equipedGun;
 
-
+    public void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         // move the player
        if(Input.GetKey(KeyCode.A))
         {
-            print(equipedGun);
+            //print(equipedGun);
             deltaX = -1;
             sp.flipX = false;
             // if the equiped gun is not null then flip it
@@ -88,14 +90,17 @@ public class PlayerController : MonoBehaviour
 
         rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            equipedActualGun.Fire();
+            print("click");
+            Gun.instance.Fire();
+            //gun.instance.fire();
+            
         }
 
-       
 
-       
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -103,11 +108,10 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Pistol"))
         {
             gunsOn[0] = true;
-            //Destroy(collision.gameObject);
             equipedGun = collision.gameObject;
             equipedGun.transform.SetParent(transform);
-            //pickedItem.transform.position = transform.position + Vector3.right * 0.5f;
-
+            Gun.instance.equiped = true;
+            print(Gun.instance.equiped);
             //player.equipedGun = pickedItem;
         }
         if (collision.CompareTag("Shotgun"))

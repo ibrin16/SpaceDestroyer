@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2671124064042883281}
   - component: {fileID: 8459583318489965426}
-  - component: {fileID: 599437465756105216}
   m_Layer: 0
   m_Name: ShotgunPickup
   m_TagString: Shotgun
@@ -80,23 +79,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &599437465756105216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533927421531758803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d510ee22a3d2b46a2c58f2a5a22d1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammo: 4
-  clipAmmo: 4
-  fireRate: 0
-  magSize: 0
-  magIncrease: 0
-  equiped: 0
-  shotPrefab: {fileID: 4997541168239589065, guid: a9a8097d9748de948b440c7e4f1ae838,
-    type: 3}

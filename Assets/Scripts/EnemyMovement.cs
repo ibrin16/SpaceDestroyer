@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     public bool jump;
     public float speed;
 
-    public PlayerInteraction player;
+    //public PlayerInteraction player;
     private Rigidbody2D rgbd;
 
     public int health;
@@ -48,11 +48,11 @@ public class EnemyMovement : MonoBehaviour
         {
             float deltaX = 0;
             float deltaY = 0;
-            if(player.transform.position.x < transform.position.x)
+            if(PlayerInteraction.instance.transform.position.x < transform.position.x)
             {
                 deltaX = -1;
             }
-            if (player.transform.position.x > transform.position.x)
+            if (PlayerInteraction.instance.transform.position.x > transform.position.x)
             {
                 deltaX = 1;
             }
@@ -90,31 +90,43 @@ public class EnemyMovement : MonoBehaviour
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
+        // maybe should shoot a ray cast to hit the player instead
+        // may work better
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
-            player.Hit(damage);
+            PlayerInteraction.instance.Hit(damage);
+            print("here1");
         }
         if (collision.CompareTag("Laser"))
         {
-            Hit(1);
+            Hit(1,1);
+            Destroy(collision.gameObject);
         }
         if (collision.CompareTag("Ball"))
         {
-            Hit(2);
+            Hit(2,2);
         }
         if (collision.CompareTag("RPG")){
-            Hit(5);
+            Hit(5,5);
         }
     }
-    private void Hit(int damage)
+    private void Hit(int damage, int knockback)
     {
+        KnockBack(knockback);
         health -= damage;
-        if(health == 0)
+        if(health <= 0)
         {
             Destroy(gameObject);
+            print("enemy death");
         }
     }   
+
+    // this knock back is not working
+    private void KnockBack(int distance)
+    {
+        rgbd.velocity = new Vector3(-distance, 0, 0) * speed * 3;
+    }
 
 
 }
