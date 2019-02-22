@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIHealthPanel : MonoBehaviour
 {
     public int health;
-    public Image UIImage;
+    public RectTransform UIImage;
 
     public static UIHealthPanel instance;
 
@@ -17,7 +17,7 @@ public class UIHealthPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIImage = GetComponent<Image>();
+
     }
 
     // Update is called once per frame
@@ -28,8 +28,17 @@ public class UIHealthPanel : MonoBehaviour
 
     public void UpdateHealth()
     {
+        if(UIImage == null)
+        {
+            return;
+        }
+
         health = PlayerInteraction.instance.health;
-        
+        float scale = (float)health / 100f;
+        Vector3 scaleHealth = UIImage.transform.localScale;
+        scaleHealth.x = scale;
+        UIImage.transform.localScale = scaleHealth;
+        print(scale);
     }
     
 }

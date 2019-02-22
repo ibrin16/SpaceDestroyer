@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  UIImage: {fileID: 1970218941}
+  UIImage: {fileID: 1970218940}
 --- !u!114 &663962732
 MonoBehaviour:
   m_ObjectHideFlags: 0

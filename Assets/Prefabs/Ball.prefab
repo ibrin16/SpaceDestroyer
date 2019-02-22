@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3533927421531758803
+--- !u!1 &2990440994443801221
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2671124064042883281}
-  - component: {fileID: 8459583318489965426}
-  - component: {fileID: 8875309394849961708}
+  - component: {fileID: 6222105478922017807}
+  - component: {fileID: 2481970139504649952}
+  - component: {fileID: 24559229902879900}
   m_Layer: 0
-  m_Name: ShotgunPickup
-  m_TagString: Shotgun
+  m_Name: Ball
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2671124064042883281
+--- !u!4 &6222105478922017807
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533927421531758803}
+  m_GameObject: {fileID: 2990440994443801221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2842331, y: -0.96716523, z: 0.41364807}
+  m_LocalPosition: {x: 363, y: 227, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8459583318489965426
+--- !u!212 &2481970139504649952
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533927421531758803}
+  m_GameObject: {fileID: 2990440994443801221}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -69,33 +69,28 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300016, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
+  m_Sprite: {fileID: 21300024, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.9, y: 0.55}
+  m_Size: {x: 0.6, y: 0.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8875309394849961708
+--- !u!114 &24559229902879900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533927421531758803}
+  m_GameObject: {fileID: 2990440994443801221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a057233143ae5d9498d7cf0a6ecfc626, type: 3}
+  m_Script: {fileID: 11500000, guid: 7209228a5377ffd47bf2e9cc447b5352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guns:
-  - {fileID: 21300014, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
-  - {fileID: 21300016, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
-  - {fileID: 21300022, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
-  - {fileID: 21300020, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
-  - {fileID: 21300018, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
-  gun: 
+  direction: {x: 0, y: 0, z: 0}
+  speed: 0

@@ -83,20 +83,30 @@ public class PlayerController : MonoBehaviour
             }
         }
         //jump
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.W))
         {
             Jump();
         }
 
         rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
-        if (Input.GetMouseButtonDown(0))
+
+        if (Gun.instance.auto)
         {
-            print("click");
-            Gun.instance.Fire();
-            //gun.instance.fire();
-            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Fire.instance.GunFire();
+            }
         }
+
+        if (!Gun.instance.auto)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Fire.instance.GunFire();
+            }
+        }
+        
 
 
 
@@ -111,13 +121,13 @@ public class PlayerController : MonoBehaviour
             equipedGun = collision.gameObject;
             equipedGun.transform.SetParent(transform);
             Gun.instance.equiped = true;
-            print(Gun.instance.equiped);
-            //player.equipedGun = pickedItem;
+            Gun.instance.myGuns[0] = 0;
         }
         if (collision.CompareTag("Shotgun"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
+            Gun.instance.myGuns[0] = 1;
         }
         
     }

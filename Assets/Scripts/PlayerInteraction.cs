@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         // need to also implement the health bar changing
         health -= damage;
-        //UIHealthPanel.instance.UpdateHealth();
+        UIHealthPanel.instance.UpdateHealth();
 
         if (health <= 0)
         {
