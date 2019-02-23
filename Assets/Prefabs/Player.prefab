@@ -99,7 +99,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 35
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f6b46c3d953514e899decb08010cd78a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -139,15 +139,7 @@ MonoBehaviour:
   - {fileID: 21300010, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   animationTime: 0.1
   deltaX: 0
-  allGuns:
-  - {fileID: 2208073389763005657, guid: 9748f761967a70340b694af5ed861927, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   equipedActualGun: {fileID: 0}
-  endJumpTime: 20
   gunsOn: 000000000000
   equipedGun: {fileID: 0}
 --- !u!58 &8704725946245932891
