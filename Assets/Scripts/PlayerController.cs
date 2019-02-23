@@ -17,8 +17,11 @@ public class PlayerController : MonoBehaviour
     //public Gun[] allGuns;
     public Gun equipedActualGun;
 
-    public bool[] gunsOn;
-    public GameObject equipedGun;
+    private GameObject equipedGun;
+    private bool grounded;
+    public float jumpTakeoff;
+    private float normalSpeed;
+    private float jumpSpeed;
 
     public void Awake()
     {
@@ -29,10 +32,10 @@ public class PlayerController : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         rgbd = GetComponent<Rigidbody2D>();
-        // set all the guns to false rn as one is picked up then it will turn to true
-        gunsOn = new bool[] {false, false, false, false, false, false};
-        //gunsOn = new bool[] {true, true, true, true, true, true };
-
+        grounded = true;
+        normalSpeed = speed;
+        jumpSpeed = speed / 2;
+        equipedGun = PlayerInteraction.instance.equipedGun;
     }
 
     // Update is called once per frame
@@ -83,9 +86,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         //jump
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && grounded)
         {
-            Jump();
+            deltaY = 7;
+            speed = jumpSpeed;
+            grounded = false;
         }
 
         rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
@@ -107,34 +112,34 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-
+        if(rgbd.velocity.y != 0)
+        {
+            grounded = false;
+            speed = normalSpeed;
+        }
+        else
+        {
+            grounded = true;
+        }
 
 
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Pistol"))
-        {
-            gunsOn[0] = true;
-            equipedGun = collision.gameObject;
-            equipedGun.transform.SetParent(transform);
-            Gun.instance.equiped = true;
-            Gun.instance.myGuns[0] = 0;
-        }
-        if (collision.CompareTag("Shotgun"))
-        {
-            gunsOn[1] = true;
-            Destroy(collision.gameObject);
-            Gun.instance.myGuns[0] = 1;
-        }
-        
-    }
+   
 
     private void Jump()
     {
+
+        //deltaY = 1;
         print("here");
+        //else if (Input.GetButtonUp("Jump"))
+        //{
+        //    if (velocity.y > 0)
+        //    {
+        //        velocity.y = velocity.y * 0.5f;
+        //    }
+        //}
     }
 
     

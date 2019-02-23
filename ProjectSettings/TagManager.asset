@@ -10,7 +10,9 @@ TagManager:
   - Laser
   - RPG
   - AR
+  - Better AR
   - Slot
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -15,10 +15,15 @@ public class Gun : MonoBehaviour
     public bool equiped;
     public bool auto;
 
+    public bool first;
+    public bool second;
+    public bool third;
+
     public Sprite[] difGuns;
-    private int fireType; //0 is pistol 1 is shotgun
+    public int fireType; //0 is pistol 1 is shotgun
 
     public int[] myGuns;
+    public int equipedGun;
 
 
     //public PlayerController player;
@@ -34,38 +39,44 @@ public class Gun : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         equiped = false;
-        
+        myGuns = new int[6];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.instance.gunsOn[0])
+        if (PlayerInteraction.instance.gunsOn[0])
         {
-            // i think this is the problem
             equiped = true;
         }
         
         // equip the pistol
         // what if just had one object that changed sprites and shooting style
-        if (PlayerController.instance.equipedGun != null)
+        if (PlayerInteraction.instance.equipedGun != null)
         {
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SwitchGuns(0); 
+                SwitchGuns(0);
+                equipedGun = 0;
+
+
             }
             // equip the shotgun
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 SwitchGuns(1);
+                equipedGun = 1;
+
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 SwitchGuns(2);
+                equipedGun = 2;
+
             }
-      
+
         }
        
 
@@ -89,6 +100,7 @@ public class Gun : MonoBehaviour
             // and change the fire type
             fireType = 1;
             auto = false;
+
         }
         if (myGuns[index] == 2)
         {

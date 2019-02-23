@@ -305,6 +305,7 @@ MonoBehaviour:
   equipedActualGun: {fileID: 0}
   gunsOn: 000000000000
   equipedGun: {fileID: 0}
+  jumpTakeoff: 7
 --- !u!58 &8704725946245932891
 CircleCollider2D:
   m_ObjectHideFlags: 0

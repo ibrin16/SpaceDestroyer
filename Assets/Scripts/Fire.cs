@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    public Projectile shotPrefab;
+    public Projectile laserPrefab;
+    public Projectile ballPrefab;
+    public Projectile misslePrefab;
+
+    [HideInInspector]
+    public Projectile current;
+
     public static Fire instance;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -26,6 +32,25 @@ public class Fire : MonoBehaviour
         //print("here");
         if (Gun.instance.equiped)
         {
+            // need to check what the gun type is and then change the prefab that is shot accordingly
+            switch (Gun.instance.fireType)
+            {
+                case 0:
+                    current = laserPrefab;
+                    break;
+                case 1:
+                    current = ballPrefab;
+                    break;
+                case 2:
+                    current = laserPrefab;
+                    break;
+                case 3:
+                    current = ballPrefab;
+                    break;
+                case 4:
+                    current = misslePrefab;
+                    break;
+            }
             if (Gun.instance.auto)
             {
                 Autofire();
@@ -43,13 +68,16 @@ public class Fire : MonoBehaviour
     // also need to factor in fire rate
     public void Autofire()
     {
-
+        Vector3 start = new Vector3(transform.position.x + 0.75f, transform.position.y, 0);
+        Projectile shot = Instantiate(current, start, Quaternion.identity);
     }
 
     // this needs to go in the correct direction
     public void Singlefire()
     {
-        Vector3 start = new Vector3(transform.position.x + 3, transform.position.y, 0);
-        Projectile shot = Instantiate(shotPrefab, start, Quaternion.identity);
+
+       
+        Vector3 start = new Vector3(transform.position.x + 0.75f, transform.position.y, 0);
+        Projectile shot = Instantiate(current, start, Quaternion.identity);
     }
 }

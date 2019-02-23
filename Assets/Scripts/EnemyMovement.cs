@@ -106,9 +106,13 @@ public class EnemyMovement : MonoBehaviour
         if (collision.CompareTag("Ball"))
         {
             Hit(2,2);
+            Destroy(collision.gameObject);
+
         }
         if (collision.CompareTag("RPG")){
             Hit(5,5);
+            Destroy(collision.gameObject);
+
         }
     }
     private void Hit(int damage, int knockback)

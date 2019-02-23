@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4974495224429785699}
   - component: {fileID: 4974495224429785698}
+  - component: {fileID: 1170758844301120515}
   - component: {fileID: 2861101517500478805}
   m_Layer: 0
   m_Name: PistolPickup
@@ -80,6 +81,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1170758844301120515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974495224429785696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7629d6e12caac6a4b885546368b4465e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 8313720419694387232, guid: a9a8097d9748de948b440c7e4f1ae838,
+    type: 3}
+  ballPrefab: {fileID: 24559229902879900, guid: bcb125763ef2db44a96adda2bde389a7,
+    type: 3}
+  misslePrefab: {fileID: 0}
+  current: {fileID: 0}
 --- !u!114 &2861101517500478805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,12 +118,11 @@ MonoBehaviour:
   magIncrease: 0
   equiped: 1
   auto: 0
-  shotPrefab: {fileID: 8313720419694387232, guid: a9a8097d9748de948b440c7e4f1ae838,
-    type: 3}
-  player: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb, type: 3}
   difGuns:
   - {fileID: 21300014, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300016, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300022, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300020, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300018, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
+  fireType: 0
+  myGuns: 

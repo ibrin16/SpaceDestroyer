@@ -21,4 +21,13 @@ public class Projectile : MonoBehaviour
     {
         rgbd.velocity = new Vector3(5,0,0) * speed;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // need to destroy on collision with the wall
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
