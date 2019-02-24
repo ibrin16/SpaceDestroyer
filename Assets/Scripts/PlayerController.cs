@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         print(grounded);
 
         Vector2 vel = rgbd.velocity;
+        vel.x = 0;
 
         //deltaX = 0;
         //float deltaY = 0;
@@ -117,8 +118,7 @@ public class PlayerController : MonoBehaviour
         //print(PermissionToJump());
 
         //jump
-        if (Input.GetKey(KeyCode.W))
-        // && PermissionToJump())
+        if (Input.GetKey(KeyCode.W) && PermissionToJump())
         {
             vel = ApplyJump(vel);
         }
