@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public int groundCheckRayCount = 3;
     public LayerMask Ground = 0;
 
-    bool grounded = false;
+    bool grounded = true;
 
     float lostGroundingTime = 0;
     float lastJumpTime = 0;
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         UpdateGrounding();
+        print(grounded);
 
         Vector2 vel = rgbd.velocity;
 
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
                 switchTime = 0;
             }
         }
-        print(PermissionToJump());
+        //print(PermissionToJump());
 
         //jump
         if (Input.GetKey(KeyCode.W))
