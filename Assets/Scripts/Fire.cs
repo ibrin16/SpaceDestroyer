@@ -7,6 +7,7 @@ public class Fire : MonoBehaviour
     public Projectile laserPrefab;
     public Projectile ballPrefab;
     public Projectile misslePrefab;
+    public float fireSide;
 
     [HideInInspector]
     public Projectile current;
@@ -68,7 +69,7 @@ public class Fire : MonoBehaviour
     // also need to factor in fire rate
     public void Autofire()
     {
-        Vector3 start = new Vector3(transform.position.x + 0.75f, transform.position.y, 0);
+        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
     }
 
@@ -77,7 +78,7 @@ public class Fire : MonoBehaviour
     {
 
        
-        Vector3 start = new Vector3(transform.position.x + 0.75f, transform.position.y, 0);
+        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
     }
 }

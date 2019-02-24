@@ -45,14 +45,14 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInteraction.instance.gunsOn[0])
+        if (PlayerController.instance.gunsOn[0])
         {
             equiped = true;
         }
         
         // equip the pistol
         // what if just had one object that changed sprites and shooting style
-        if (PlayerInteraction.instance.equipedGun != null)
+        if (PlayerController.instance.equipedGun != null)
         {
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
