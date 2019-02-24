@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
-    public float speed;
+    public float speed = 5;
     private SpriteRenderer sp;
     public Sprite[] sprites;
     private Rigidbody2D rgbd;
@@ -15,15 +15,39 @@ public class PlayerController : MonoBehaviour
     public float deltaX = 0;
     public bool[] gunsOn;
 
+    public bool canMove = true;
 
     //public Gun[] allGuns;
     public Gun equipedActualGun;
-
     public GameObject equipedGun;
-    private bool grounded;
-    public float jumpTakeoff;
-    private float normalSpeed;
-    private float jumpSpeed;
+ 
+ 
+    //public float jumpTakeoff;
+    //private float normalSpeed = 5;
+    //private float jumpSpeed;
+
+    [Header("Jump Controls")]
+    public float jumpVelocity = 15;
+    public float gravity = 40;
+    public float jumpingToleranceTimer = .1f;
+    public float groundingToleranceTimer = .1f;
+
+    [HideInInspector] public bool inputJump;
+    [HideInInspector] public bool IsGrounded { get { return grounded; } }
+
+    [Header("Grounding")]
+    public Vector2 groundCheckOffset = new Vector2(0, 0.1f);
+    public float groundCheckWidth = 1;
+    public float groundCheckDepth = 0.2f;
+    public int groundCheckRayCount = 3;
+    public LayerMask Ground = 0;
+
+    bool grounded = false;
+
+    float lostGroundingTime = 0;
+    float lastJumpTime = 0;
+    float lastInputJump = 0;
+
 
     public void Awake()
     {
@@ -34,24 +58,28 @@ public class PlayerController : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         rgbd = GetComponent<Rigidbody2D>();
-        grounded = true;
-        normalSpeed = speed;
-        jumpSpeed = speed / 2;
+        //grounded = true;
+        //normalSpeed = speed;
+        //jumpSpeed = speed / 2;
         // = PlayerInteraction.instance.equipedGun;
         gunsOn = new bool[] { false, false, false, false, false, false };
-
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        deltaX = 0;
-        float deltaY = 0;
+        UpdateGrounding();
+
+        Vector2 vel = rgbd.velocity;
+
+        //deltaX = 0;
+        //float deltaY = 0;
         // move the player
-       if(Input.GetKey(KeyCode.A))
+       if((Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.LeftArrow)))
         {
             //print(equipedGun);
-            deltaX = -1;
+            vel.x = -1 * speed;
             sp.flipX = false;
             // if the equiped gun is not null then flip it
             
@@ -60,8 +88,6 @@ public class PlayerController : MonoBehaviour
                     equipedGun.GetComponent<SpriteRenderer>().flipX = false;
                     equipedGun.transform.position = this.transform.position + new Vector3(-.5f, 0, 0);
                     Fire.instance.fireSide = -.75f;
-
-
             }
             switchTime += Time.deltaTime;
             if(switchTime >= animationTime)
@@ -69,20 +95,18 @@ public class PlayerController : MonoBehaviour
                 currentSprite = (currentSprite + 1)%sprites.Length;
                 sp.sprite = sprites[currentSprite];
                 switchTime = 0;
-       
             }
 
         }
-        if (Input.GetKey(KeyCode.D))
+        if ((Input.GetKey(KeyCode.D)) || (Input.GetKey(KeyCode.RightArrow)))
         {
-            deltaX = 1;
+            vel.x = 1 * speed;
             sp.flipX = true;
             if (equipedGun != null)
             {
                 equipedGun.GetComponent<SpriteRenderer>().flipX = true;
                 equipedGun.transform.position = this.transform.position + new Vector3(.5f, 0, 0);
                 Fire.instance.fireSide = -.75f;
-
             }
             switchTime += Time.deltaTime;
             if (switchTime >= animationTime)
@@ -90,19 +114,18 @@ public class PlayerController : MonoBehaviour
                 currentSprite = (currentSprite + 1) % sprites.Length;
                 sp.sprite = sprites[currentSprite];
                 switchTime = 0;
-                
-
             }
         }
-        //jump
-        if (Input.GetKey(KeyCode.W) && grounded)
-        {
-            deltaY = 7;
-            speed = jumpSpeed;
-            grounded = false;
-        }
+        print(PermissionToJump());
 
-        rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
+        //jump
+        if (Input.GetKey(KeyCode.W) && PermissionToJump())
+        {
+            vel = ApplyJump(vel);
+        }
+        vel.y += -gravity * Time.deltaTime;
+        rgbd.velocity = vel;
+        //rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
 
         if (Gun.instance.auto)
@@ -120,31 +143,51 @@ public class PlayerController : MonoBehaviour
                 Fire.instance.GunFire();
             }
         }
-        
-        if(rgbd.velocity.y != 0)
-        {
-            grounded = false;
-        }
-        else
-        {
-            grounded = true;
-            speed = normalSpeed;
-
-        }
-
-
-
     }
 
-   
-
-    private void Jump()
+    
+    /// <summary>
+    /// Functions to implement jumping
+    /// </summary>
+    Vector2 ApplyJump (Vector2 vel)
     {
-
-        //deltaY = 1;
-        print("here");
-     
+        vel.y = jumpVelocity;
+        lastJumpTime = Time.time;
+        grounded = false;
+        return vel;
     }
+
+    bool PermissionToJump ()
+    {
+        bool wasJustGrounded = Time.time < lostGroundingTime + groundingToleranceTimer;
+        bool hasJustJumped = Time.time <= lastJumpTime + Time.deltaTime;
+        return (grounded || wasJustGrounded) && !hasJustJumped;
+    }
+
+    void UpdateGrounding()
+    {
+        Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
+        Vector2 groundCheckStart = groudCheckCenter + Vector2.left * groundCheckWidth * 0.5f;
+        if (groundCheckRayCount > 1)
+        {
+            for (int i = 0; i < groundCheckRayCount; i++)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, Ground);
+                if (hit.collider != null)
+                {
+                    grounded = true;
+                    return;
+                }
+                groundCheckStart += Vector2.right * (1.0f / (groundCheckRayCount - 1.0f)) * groundCheckWidth;
+            }
+        }
+        if (grounded)
+        {
+            lostGroundingTime = Time.time;
+        }
+        grounded = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // need to check if gun 0 is equipped
