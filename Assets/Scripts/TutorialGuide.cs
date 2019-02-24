@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TutorialGuide : MonoBehaviour
 {
-    public string number;
+    public int number;
     public LayerMask playerLayer;
-    public GameObject textPrefab;
+    public GameObject[] textPrefab;
     private GameObject text;
     private bool textSeen;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class TutorialGuide : MonoBehaviour
             Vector3 spawn = new Vector3(10, 10, 0);
             if(!textSeen)
             {
-                text = Instantiate(textPrefab, spawn, Quaternion.identity);
+                text = Instantiate(textPrefab[number], spawn, Quaternion.identity);
                 text.transform.SetParent(GameUICanvas.instance.transform);
                 text.transform.position += new Vector3(325, 300,0);
                 textSeen = true;
