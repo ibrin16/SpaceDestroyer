@@ -116,11 +116,12 @@ public class PlayerController : MonoBehaviour
         print(PermissionToJump());
 
         //jump
-        if (Input.GetKey(KeyCode.W) && PermissionToJump())
+        if (Input.GetKey(KeyCode.W))
+        // && PermissionToJump())
         {
             vel = ApplyJump(vel);
         }
-        //vel.y += -gravity * Time.deltaTime;
+        vel.y += -gravity * Time.deltaTime;
         rgbd.velocity = vel;
         //rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
