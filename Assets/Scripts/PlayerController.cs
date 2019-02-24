@@ -124,11 +124,12 @@ public class PlayerController : MonoBehaviour
         if(rgbd.velocity.y != 0)
         {
             grounded = false;
-            speed = normalSpeed;
         }
         else
         {
             grounded = true;
+            speed = normalSpeed;
+
         }
 
 
@@ -142,13 +143,7 @@ public class PlayerController : MonoBehaviour
 
         //deltaY = 1;
         print("here");
-        //else if (Input.GetButtonUp("Jump"))
-        //{
-        //    if (velocity.y > 0)
-        //    {
-        //        velocity.y = velocity.y * 0.5f;
-        //    }
-        //}
+     
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -172,7 +167,7 @@ public class PlayerController : MonoBehaviour
                 equipedGun.transform.position = transform.position + Vector3.right * 0.5f;
 
                 Gun.instance.equiped = true;
-                Gun.instance.myGuns[0] = 0;
+                Gun.instance.myGuns[SlotFinder()] = 0;
             }
 
         }
@@ -180,25 +175,25 @@ public class PlayerController : MonoBehaviour
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[0] = 1;
+            Gun.instance.myGuns[SlotFinder()] = 1;
         }
         if (collision.CompareTag("AR"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[0] = 2;
+            Gun.instance.myGuns[SlotFinder()] = 2;
         }
         if (collision.CompareTag("Better AR"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[0] = 3;
+            Gun.instance.myGuns[SlotFinder()] = 3;
         }
         if (collision.CompareTag("RPG"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[0] = 4;
+            Gun.instance.myGuns[SlotFinder()] = 4;
         }
 
     }
@@ -206,14 +201,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!Gun.instance.first)
         {
+            Gun.instance.first = true;
             return 0;
         }
         else if (!Gun.instance.second)
         {
+            Gun.instance.second = true;
             return 1;
         }
         else if (!Gun.instance.third)
         {
+            Gun.instance.third = true;
             return 2;
         }
         else

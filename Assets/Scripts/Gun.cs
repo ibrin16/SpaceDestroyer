@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         equiped = false;
-        myGuns = new int[6];
+        myGuns = new int[3];
     }
 
     // Update is called once per frame
