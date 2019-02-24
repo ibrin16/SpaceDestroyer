@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
     public float jumpingToleranceTimer = .1f;
     public float groundingToleranceTimer = .1f;
 
-    [HideInInspector] public bool inputJump;
-    [HideInInspector] public bool IsGrounded { get { return grounded; } }
-
     [Header("Grounding")]
     public Vector2 groundCheckOffset = new Vector2(0, 0.1f);
     public float groundCheckWidth = 1;
@@ -46,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     float lostGroundingTime = 0;
     float lastJumpTime = 0;
-    float lastInputJump = 0;
+    //float lastInputJump = 0;
 
 
     public void Awake()
@@ -67,7 +64,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateGrounding();
 
@@ -123,7 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             vel = ApplyJump(vel);
         }
-        vel.y += -gravity * Time.deltaTime;
+        //vel.y += -gravity * Time.deltaTime;
         rgbd.velocity = vel;
         //rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
