@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        offset = new Vector3(0, 0, transform.position.z);
+        offset = new Vector3(-10, 0, transform.position.z);
         instance = this;
     }
 

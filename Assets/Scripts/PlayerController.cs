@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour
     public float groundCheckWidth = 1;
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
-    public LayerMask Ground = 0;
+    public LayerMask groundLayers = 0;
 
-    bool grounded = true;
+    bool grounded = false;
 
     float lostGroundingTime = 0;
     float lastJumpTime = 0;
@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 vel = rgbd.velocity;
         vel.x = 0;
+        //vel.y = 0;
 
         //deltaX = 0;
         //float deltaY = 0;
@@ -115,10 +116,10 @@ public class PlayerController : MonoBehaviour
                 switchTime = 0;
             }
         }
-        //print(PermissionToJump());
+        print(PermissionToJump());
 
         //jump
-        if (Input.GetKey(KeyCode.W) && PermissionToJump())
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
         {
             vel = ApplyJump(vel);
         }
@@ -165,15 +166,19 @@ public class PlayerController : MonoBehaviour
 
     void UpdateGrounding()
     {
+        //print("In function");
         Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
         Vector2 groundCheckStart = groudCheckCenter + Vector2.left * groundCheckWidth * 0.5f;
         if (groundCheckRayCount > 1)
         {
+            //print("first check");
             for (int i = 0; i < groundCheckRayCount; i++)
             {
-                RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, Ground);
+                //print("second check");
+                RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, groundLayers);
                 if (hit.collider != null)
                 {
+                    //print("here");
                     grounded = true;
                     return;
                 }
