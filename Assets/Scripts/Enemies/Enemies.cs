@@ -12,6 +12,7 @@ public abstract class Enemies : MonoBehaviour
     protected int damage;
     public bool dead = false;
     public Sprite[] aframes;
+    protected LayerMask playerLayerMask;
 
 
     // Start is called before the first frame update
@@ -27,7 +28,8 @@ public abstract class Enemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        //Movement();
+        MoveEnemy();
         if (dead)
         {
             Destroy(gameObject);
@@ -76,4 +78,43 @@ public abstract class Enemies : MonoBehaviour
         }
     }
 
+    public void MoveEnemy()
+    {
+        bool move = false;
+        Vector2 direction = new Vector2(5, 0);
+        Vector2 directionBack = new Vector2(-5, 0);
+        RaycastHit2D hitForward = Physics2D.Raycast(transform.position, direction, direction.magnitude, playerLayerMask);
+        RaycastHit2D hitBack = Physics2D.Raycast(transform.position, directionBack, directionBack.magnitude, playerLayerMask);
+
+        if (hitForward.collider != null || hitBack.collider != null)
+        {
+            move = true;
+        }
+
+        // shoot a ray cast for move
+        if (move)
+        {
+            float deltaX = 0;
+            float deltaY = 0;
+            if (PlayerInteraction.instance.transform.position.x < transform.position.x)
+            {
+                deltaX = -1;
+            }
+            if (PlayerInteraction.instance.transform.position.x > transform.position.x)
+            {
+                deltaX = 1;
+            }
+            rgbd.velocity = new Vector3(deltaX, deltaY, 0);
+        }
+
+        // animation
+        if (rgbd.velocity.x < 0)
+        {
+            sr.flipX = false;
+        }
+        if (rgbd.velocity.x > 0)
+        {
+            sr.flipX = true;
+        }
+    }
 }

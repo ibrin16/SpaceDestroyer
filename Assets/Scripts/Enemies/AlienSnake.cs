@@ -14,7 +14,7 @@ public class AlienSnake : Enemies
 
     public override void Movement()
     {
-        Vector3 offset = new Vector3(0.5f, 0, 0) * Mathf.Sin(Time.time);
+        Vector3 offset = new Vector3(0, 0.3f, 0) * Mathf.Sin(Time.time);
         transform.position = startPosition + offset;
     }
 
