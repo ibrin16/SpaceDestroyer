@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
     public LayerMask groundLayers = 0;
-    private Vector2 vel;
+    //private Vector2 vel;
 
     bool grounded = false;
 
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         UpdateGrounding();
         //print(grounded);
 
-        vel = rgbd.velocity;
+        Vector2 vel = rgbd.velocity;
         vel.x = 0;
         //vel.y = 0;
 
@@ -120,8 +120,7 @@ public class PlayerController : MonoBehaviour
         //print(PermissionToJump());
 
         //jump
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        && PermissionToJump())
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
         {
             vel = ApplyJump(vel);
 
@@ -188,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 {
                     print("here");
                     grounded = true;
-                    rgbd.velocity = new Vector3(vel.x,0,0);
+                    //rgbd.velocity = new Vector3(vel.x,0,0);
                     return;
 
                 }
@@ -279,6 +278,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    void OnDrawGizmosSelected()
+    {
+        Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
+        Vector2 groundCheckStart = groudCheckCenter + Vector2.left * groundCheckWidth * 0.5f;
+        if (groundCheckRayCount > 1)
+        {
+            for (int i = 0; i < groundCheckRayCount; i++)
+            {
+                Debug.DrawLine(groundCheckStart, groundCheckStart + Vector2.down * groundCheckDepth, Color.red);
+                groundCheckStart += Vector2.right * (1.0f / (groundCheckRayCount - 1.0f)) * groundCheckWidth;
+            }
+        }
+    }
 
 }
