@@ -270,6 +270,11 @@ PrefabInstance:
       propertyPath: groundLayers.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
+        type: 3}
+      propertyPath: groundCheckOffset.y
+      value: -0.42
+      objectReference: {fileID: 0}
     - target: {fileID: 2335347255362476977, guid: f748b49e251fca346b823d19d453b6cb,
         type: 3}
       propertyPath: m_SortingOrder

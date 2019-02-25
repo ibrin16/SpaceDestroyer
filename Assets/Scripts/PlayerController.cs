@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public float groundingToleranceTimer = .1f;
 
     [Header("Grounding")]
-    public Vector2 groundCheckOffset = new Vector2(0, 0.1f);
+    public Vector2 groundCheckOffset = new Vector2(0, -0.42f);
     public float groundCheckWidth = 1;
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
