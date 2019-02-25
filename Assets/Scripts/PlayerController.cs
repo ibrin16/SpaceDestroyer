@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
     public LayerMask groundLayers = 0;
-    //private Vector2 vel;
 
     bool grounded = false;
 
@@ -74,8 +73,6 @@ public class PlayerController : MonoBehaviour
         vel.x = 0;
         //vel.y = 0;
 
-        //deltaX = 0;
-        //float deltaY = 0;
         // move the player
        if((Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.LeftArrow)))
         {
@@ -117,7 +114,6 @@ public class PlayerController : MonoBehaviour
                 switchTime = 0;
             }
         }
-        //print(PermissionToJump());
 
         //jump
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
@@ -125,13 +121,8 @@ public class PlayerController : MonoBehaviour
             vel = ApplyJump(vel);
 
         }
-        if (!grounded)
-        {
-            vel.y += -gravity * Time.deltaTime;
-        }
+        vel.y += -gravity * Time.deltaTime;
         rgbd.velocity = vel;
-        //rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
-
 
         if (Gun.instance.auto)
         {
@@ -171,12 +162,10 @@ public class PlayerController : MonoBehaviour
 
     void UpdateGrounding()
     {
-        //print("In function");
         Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
         Vector2 groundCheckStart = groudCheckCenter + Vector2.down * groundCheckWidth * 0.5f;
         if (groundCheckRayCount > 1)
         {
-            //print("first check");
             for (int i = 0; i < groundCheckRayCount; i++)
             {
                 //print("second check");
@@ -185,11 +174,8 @@ public class PlayerController : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, groundLayers);
                 if (hit.collider != null)
                 {
-                    print("here");
                     grounded = true;
-                    //rgbd.velocity = new Vector3(vel.x,0,0);
                     return;
-
                 }
                 groundCheckStart += Vector2.right * (1.0f / (groundCheckRayCount - 1.0f)) * groundCheckWidth;
             }
@@ -278,6 +264,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to draw the red lines for the grounding raycast. Only active in the editor and when the instance is selected.
+    /// Borrowed from Benno Lueders, DIS
+    /// </summary>
     void OnDrawGizmosSelected()
     {
         Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
