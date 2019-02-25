@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         UpdateGrounding();
-        print(grounded);
+        //print(grounded);
 
         Vector2 vel = rgbd.velocity;
         vel.x = 0;
@@ -116,10 +116,11 @@ public class PlayerController : MonoBehaviour
                 switchTime = 0;
             }
         }
-        print(PermissionToJump());
+        //print(PermissionToJump());
 
         //jump
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+        // && PermissionToJump())
         {
             vel = ApplyJump(vel);
         }
@@ -168,17 +169,19 @@ public class PlayerController : MonoBehaviour
     {
         //print("In function");
         Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
-        Vector2 groundCheckStart = groudCheckCenter + Vector2.left * groundCheckWidth * 0.5f;
+        Vector2 groundCheckStart = groudCheckCenter + Vector2.down * groundCheckWidth * 0.5f;
         if (groundCheckRayCount > 1)
         {
             //print("first check");
             for (int i = 0; i < groundCheckRayCount; i++)
             {
                 //print("second check");
+                print(groundCheckStart);
+                print(groundCheckDepth);
                 RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, groundLayers);
                 if (hit.collider != null)
                 {
-                    //print("here");
+                    print("here");
                     grounded = true;
                     return;
                 }
