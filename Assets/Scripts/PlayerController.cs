@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
     public LayerMask groundLayers = 0;
+    private Vector2 vel;
 
     bool grounded = false;
 
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
         UpdateGrounding();
         //print(grounded);
 
-        Vector2 vel = rgbd.velocity;
+        vel = rgbd.velocity;
         vel.x = 0;
         //vel.y = 0;
 
@@ -119,12 +120,16 @@ public class PlayerController : MonoBehaviour
         //print(PermissionToJump());
 
         //jump
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
-        // && PermissionToJump())
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        && PermissionToJump())
         {
             vel = ApplyJump(vel);
+
         }
-        vel.y += -gravity * Time.deltaTime;
+        if (!grounded)
+        {
+            vel.y += -gravity * Time.deltaTime;
+        }
         rgbd.velocity = vel;
         //rgbd.velocity = new Vector3(deltaX, deltaY, 0) * speed;
 
@@ -176,14 +181,16 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < groundCheckRayCount; i++)
             {
                 //print("second check");
-                print(groundCheckStart);
-                print(groundCheckDepth);
+                //print(groundCheckStart);
+                //rint(groundCheckDepth);
                 RaycastHit2D hit = Physics2D.Raycast(groundCheckStart, Vector2.down, groundCheckDepth, groundLayers);
                 if (hit.collider != null)
                 {
                     print("here");
                     grounded = true;
+                    rgbd.velocity = new Vector3(vel.x,0,0);
                     return;
+
                 }
                 groundCheckStart += Vector2.right * (1.0f / (groundCheckRayCount - 1.0f)) * groundCheckWidth;
             }
@@ -245,6 +252,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 4;
         }
+        
 
     }
     private int SlotFinder()
