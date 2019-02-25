@@ -47,5 +47,13 @@ public class PlayerInteraction : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+
+    public void OnTrigggerEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("Level1");
+        }
+    }
+
 }
