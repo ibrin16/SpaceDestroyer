@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4974495224429785698}
   - component: {fileID: 1170758844301120515}
   - component: {fileID: 2861101517500478805}
+  - component: {fileID: 1892817548}
   m_Layer: 0
   m_Name: PistolPickup
   m_TagString: Pistol
@@ -98,6 +99,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 24559229902879900, guid: bcb125763ef2db44a96adda2bde389a7,
     type: 3}
   misslePrefab: {fileID: 0}
+  fireSide: 0
   current: {fileID: 0}
 --- !u!114 &2861101517500478805
 MonoBehaviour:
@@ -118,6 +120,9 @@ MonoBehaviour:
   magIncrease: 0
   equiped: 1
   auto: 0
+  first: 0
+  second: 0
+  third: 0
   difGuns:
   - {fileID: 21300014, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300016, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
@@ -126,3 +131,20 @@ MonoBehaviour:
   - {fileID: 21300018, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   fireType: 0
   myGuns: 
+  equipedGun: 0
+--- !u!58 &1892817548
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974495224429785696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.475

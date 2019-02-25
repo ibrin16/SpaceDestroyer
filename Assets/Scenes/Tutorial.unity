@@ -552,18 +552,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470695076}
   m_CullTransparentMesh: 0
---- !u!114 &577213563 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 138042141}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45a31548eab583744b58614ac94b347f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &577213566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6185710161445359891, guid: f748b49e251fca346b823d19d453b6cb,
@@ -7091,28 +7079,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a19e9e3f1ea4fc143b58c18e6a5047e5, type: 3}
---- !u!1 &1892817546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4974495224429785696, guid: 9748f761967a70340b694af5ed861927,
-    type: 3}
-  m_PrefabInstance: {fileID: 4974495223097870176}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &1892817548
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892817546}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.475
 --- !u!1 &1970218939
 GameObject:
   m_ObjectHideFlags: 0
@@ -7420,11 +7386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolPickup
       objectReference: {fileID: 0}
-    - target: {fileID: 2208073389763005657, guid: 9748f761967a70340b694af5ed861927,
-        type: 3}
-      propertyPath: equiped
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4974495224429785699, guid: 9748f761967a70340b694af5ed861927,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7480,14 +7441,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2861101517500478805, guid: 9748f761967a70340b694af5ed861927,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 577213563}
-    m_RemovedComponents:
-    - {fileID: 0}
-    - {fileID: 2208073389763005657, guid: 9748f761967a70340b694af5ed861927, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9748f761967a70340b694af5ed861927, type: 3}
 --- !u!1001 &5268156357039858553
 PrefabInstance:
@@ -7500,11 +7454,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShotgunPickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533927421531758803, guid: b0cf812514ac95c4eb28eaf9bea3f58a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 2671124064042883281, guid: b0cf812514ac95c4eb28eaf9bea3f58a,
         type: 3}
@@ -7561,8 +7510,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0cf812514ac95c4eb28eaf9bea3f58a, type: 3}
 --- !u!1001 &7819722400302652101
 PrefabInstance:
