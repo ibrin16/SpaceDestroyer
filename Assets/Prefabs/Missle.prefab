@@ -146,3 +146,5 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
+  explosionPrefab: {fileID: 6539454695460323337, guid: 5a79d82208c0231439fa5dc3253aa1fb,
+    type: 3}

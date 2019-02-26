@@ -38,9 +38,10 @@ public class Projectile : MonoBehaviour
     {
         if (Fire.instance.explosion)
         {
-            if (collision.CompareTag("Wall") || collision.CompareTag("Enemy"))
+            if (collision.CompareTag("Wall") || collision.CompareTag("Snake"))
             {
-                GameObject expl = Instantiate(explosionPrefab, transform);
+                GameObject expl = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
         // need to destroy on collision with the wall

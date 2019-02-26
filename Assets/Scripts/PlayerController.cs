@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     //public Gun[] allGuns;
     public Gun equipedActualGun;
     public GameObject equipedGun;
+    private float timer = 0;
+    
  
  
     //public float jumpTakeoff;
@@ -126,18 +128,37 @@ public class PlayerController : MonoBehaviour
 
         if (Gun.instance.auto)
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Fire.instance.GunFire();
-            }
+            //timer += Time.deltaTime;
+            //if (timer >= Fire.instance.fireRate)
+            //{
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+
+                    Fire.instance.GunFire();
+                    //timer = 0;
+                }
+            //}
         }
 
         if (!Gun.instance.auto)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Fire.instance.GunFire();
-            }
+            print(!Gun.instance.auto);
+            //timer += Time.deltaTime;
+            //if (timer >= Fire.instance.fireRate)
+            //{
+           // print(lastTimeFired);
+            timer += Time.deltaTime;
+                if (Input.GetKeyDown(KeyCode.Space) 
+                && (timer > Fire.instance.fireRate))
+                {
+                print("gere");
+                    timer = 0;
+                    Fire.instance.GunFire();
+                    //timer = 0;
+
+                }
+            //}
         }
     }
 

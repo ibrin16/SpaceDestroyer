@@ -15,6 +15,9 @@ public class Fire : MonoBehaviour
     public Projectile current;
 
     public static Fire instance;
+    public float[] rates;
+    public float fireRate;
+    public float timer;
 
 
     // Start is called before the first frame update
@@ -39,7 +42,7 @@ public class Fire : MonoBehaviour
 
     public void GunFire()
     {
-        //print("here");
+
         if (Gun.instance.equiped)
         {
             // need to check what the gun type is and then change the prefab that is shot accordingly
@@ -48,28 +51,34 @@ public class Fire : MonoBehaviour
                 case 0:
                     current = laserPrefab;
                     explosion = false;
-
+                    fireRate = rates[0];
                     break;
+
                 case 1:
                     current = ballPrefab;
                     explosion = false;
-
+                    fireRate = rates[1];
                     break;
+
                 case 2:
                     current = laserPrefab;
                     explosion = false;
-
+                    fireRate = rates[2];
                     break;
+
                 case 3:
                     current = ballPrefab;
                     explosion = false;
-
+                    fireRate = rates[3];
                     break;
+
                 case 4:
                     current = misslePrefab;
                     explosion = true;
+                    fireRate = rates[4];
                     break;
             }
+            //StartCoroutine(FireGunCorutine());
             if (Gun.instance.auto)
             {
                 Autofire();
@@ -87,14 +96,23 @@ public class Fire : MonoBehaviour
     // also need to factor in fire rate
     public void Autofire()
     {
-        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
-        Projectile shot = Instantiate(current, start, Quaternion.identity);
+        
+            Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
+            Projectile shot = Instantiate(current, start, Quaternion.identity);
+        
+        
     }
 
     // this needs to go in the correct direction
     public void Singlefire()
     {
-        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
-        Projectile shot = Instantiate(current, start, Quaternion.identity);
+     
+            Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
+            Projectile shot = Instantiate(current, start, Quaternion.identity);
     }
+
+    //IEnumerator FireGunCorutine()
+    //{
+    //    yield return new WaitForSeconds(fireRate);
+    //}
 }
