@@ -13,6 +13,9 @@ public abstract class Enemies : MonoBehaviour
     public bool dead = false;
     public Sprite[] aframes;
     protected LayerMask playerLayerMask;
+    public float waitTime;
+    protected float time = 0;
+    
 
 
     // Start is called before the first frame update
