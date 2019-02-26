@@ -479,36 +479,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: jumpVelocity
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: gravity
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: canMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 768174018305782652, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 768174018305782652, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: m_Simulated
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f748b49e251fca346b823d19d453b6cb, type: 3}
 --- !u!1001 &2371782041010688995
