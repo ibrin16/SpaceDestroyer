@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -265,6 +265,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2335347255362476977, guid: f748b49e251fca346b823d19d453b6cb,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768174018305782652, guid: f748b49e251fca346b823d19d453b6cb,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8015940822184054288, guid: f748b49e251fca346b823d19d453b6cb,
         type: 3}
       propertyPath: groundLayers.m_Bits
@@ -279,11 +289,6 @@ PrefabInstance:
         type: 3}
       propertyPath: groundCheckWidth
       value: 0.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 2335347255362476977, guid: f748b49e251fca346b823d19d453b6cb,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8704725946245932891, guid: f748b49e251fca346b823d19d453b6cb,
         type: 3}
