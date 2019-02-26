@@ -96,6 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   speed: 10
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!50 &2165852600184653152
 Rigidbody2D:
   serializedVersion: 4
@@ -115,7 +118,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1163468093627690981
 BoxCollider2D:

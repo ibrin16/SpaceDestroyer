@@ -98,7 +98,8 @@ MonoBehaviour:
     type: 3}
   ballPrefab: {fileID: 24559229902879900, guid: bcb125763ef2db44a96adda2bde389a7,
     type: 3}
-  misslePrefab: {fileID: 0}
+  misslePrefab: {fileID: 3154416378968385316, guid: dae2a9f6ad5512049a98fbe37eee4a1d,
+    type: 3}
   fireSide: 0
   current: {fileID: 0}
 --- !u!114 &2861101517500478805

@@ -9,6 +9,8 @@ public class Fire : MonoBehaviour
     public Projectile misslePrefab;
     public float fireSide;
 
+    public bool explosion;
+
     [HideInInspector]
     public Projectile current;
 
@@ -24,7 +26,14 @@ public class Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerController.instance.GetComponent<SpriteRenderer>().flipX)
+        {
+            fireSide = .75f;
+        }
+        else
+        {
+            fireSide = -.75f;
+        }
     }
 
 
@@ -38,18 +47,27 @@ public class Fire : MonoBehaviour
             {
                 case 0:
                     current = laserPrefab;
+                    explosion = false;
+
                     break;
                 case 1:
                     current = ballPrefab;
+                    explosion = false;
+
                     break;
                 case 2:
                     current = laserPrefab;
+                    explosion = false;
+
                     break;
                 case 3:
                     current = ballPrefab;
+                    explosion = false;
+
                     break;
                 case 4:
                     current = misslePrefab;
+                    explosion = true;
                     break;
             }
             if (Gun.instance.auto)
@@ -76,8 +94,6 @@ public class Fire : MonoBehaviour
     // this needs to go in the correct direction
     public void Singlefire()
     {
-
-       
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
     }

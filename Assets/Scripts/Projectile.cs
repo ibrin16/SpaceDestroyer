@@ -8,26 +8,46 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
     private Rigidbody2D rgbd;
     public float speed;
+    private int xDir;
+    public LayerMask wallLayer;
+    public GameObject explosionPrefab;
     // need to make it so the object is destroyed on collision
     // Start is called before the first frame update
     void Start()
     {
         rgbd = GetComponent<Rigidbody2D>();
         direction.Normalize();
+        if (PlayerController.instance.GetComponent<SpriteRenderer>().flipX)
+        {
+            xDir = 1;
+        }
+        else
+        {
+            xDir = -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        rgbd.velocity = new Vector3(5,0,0) * speed;
+        
+        rgbd.velocity = new Vector3(xDir,0,0) * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (Fire.instance.explosion)
+        {
+            if (collision.CompareTag("Wall") || collision.CompareTag("Enemy"))
+            {
+                GameObject expl = Instantiate(explosionPrefab, transform);
+            }
+        }
         // need to destroy on collision with the wall
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
+       
     }
 }
