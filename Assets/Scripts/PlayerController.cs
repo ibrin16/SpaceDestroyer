@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     public float speed = 5;
-    private SpriteRenderer sp;
+    public SpriteRenderer sp;
     public Sprite[] sprites;
     private Rigidbody2D rgbd;
     public float animationTime;
