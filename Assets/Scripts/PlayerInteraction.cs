@@ -18,8 +18,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        // i think this is why it all blinks
-        sr = GetComponentsInChildren<SpriteRenderer>();
+        sr = GetComponents<SpriteRenderer>();
     }
 
     public void Hit(int damage)

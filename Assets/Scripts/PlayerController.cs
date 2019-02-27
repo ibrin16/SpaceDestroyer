@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
             {
                 equipedGun.GetComponent<SpriteRenderer>().flipX = true;
                 equipedGun.transform.position = this.transform.position + new Vector3(.5f, 0, 0);
-                Fire.instance.fireSide = -.75f;
+                Fire.instance.fireSide = .75f;
             }
             switchTime += Time.deltaTime;
             if (switchTime >= animationTime)
