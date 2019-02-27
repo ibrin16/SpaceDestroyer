@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: 0
   speed: 5
+  hurtTimer: 0.1
   health: 5
   damage: 25
   playerLayerMask:
@@ -107,6 +108,7 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
   - {fileID: 21300006, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
   waitTime: 0.1
+  sr: []
 --- !u!60 &3515616214800145
 PolygonCollider2D:
   m_ObjectHideFlags: 0
