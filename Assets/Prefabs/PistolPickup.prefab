@@ -109,7 +109,7 @@ MonoBehaviour:
   explosion: 0
   current: {fileID: 0}
   rates:
-  - 1
+  - 0.5
   - 3
   - 0.2
   - 0.4
