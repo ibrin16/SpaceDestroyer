@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3515616214800154
+--- !u!1 &7743460277398839101
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3515616214800148}
-  - component: {fileID: 3515616214800149}
-  - component: {fileID: 3515616214800151}
-  - component: {fileID: 3515616214800145}
-  - component: {fileID: 3515616214800150}
+  - component: {fileID: 7743460277398839091}
+  - component: {fileID: 7743460277398839090}
+  - component: {fileID: 7743460277398839094}
+  - component: {fileID: 7743460277398839089}
+  - component: {fileID: 7743460277398839088}
   m_Layer: 0
-  m_Name: AlienSnake_3
-  m_TagString: Snake
+  m_Name: SpaceHugger
+  m_TagString: SpaceHugger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3515616214800148
+--- !u!4 &7743460277398839091
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
+  m_GameObject: {fileID: 7743460277398839101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.314, y: 0.098, z: 0}
+  m_LocalScale: {x: 3, y: 4, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3515616214800149
+--- !u!212 &7743460277398839090
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
+  m_GameObject: {fileID: 7743460277398839101}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,51 +71,51 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.47, y: 0.21}
+  m_Size: {x: 0.6, y: 0.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3515616214800151
+--- !u!114 &7743460277398839094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
+  m_GameObject: {fileID: 7743460277398839101}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c15499c8912a67946b32b6846fd49d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 0
-  speed: 5
+  speed: 8
   hurtTimer: 0.1
-  health: 5
-  damage: 25
+  health: 8
+  damage: 35
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512
   sprites:
-  - {fileID: 21300000, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
-  - {fileID: 21300002, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
-  - {fileID: 21300004, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
-  - {fileID: 21300006, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
+  - {fileID: 21300000, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
+  - {fileID: 21300002, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
+  - {fileID: 21300004, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
+  - {fileID: 21300006, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
   waitTime: 0.1
   sr: []
---- !u!60 &3515616214800145
+--- !u!60 &7743460277398839089
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
+  m_GameObject: {fileID: 7743460277398839101}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -126,31 +126,34 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5666667, y: 0.7}
-    newSize: {x: 0.47, y: 0.21}
+    oldSize: {x: 0.6, y: 0.19}
+    newSize: {x: 0.6, y: 0.19}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.3998359, y: 0.3381458}
-      - {x: -0.78333336, y: 0.35000002}
-      - {x: -0.75572, y: 0.107806206}
-      - {x: -0.5995214, y: -0.087031364}
-      - {x: -0.5166667, y: -0.35000002}
-      - {x: 0.78333336, y: -0.35000002}
-      - {x: 0.73589814, y: -0.062613994}
-      - {x: 0.15176272, y: -0.13788646}
-      - {x: -0.18941998, y: -0.027102679}
---- !u!50 &3515616214800150
+    - - {x: 0.12, y: 0.065}
+      - {x: 0.06437811, y: 0.029460363}
+      - {x: -0.049999997, y: 0.095}
+      - {x: -0.29, y: 0.095}
+      - {x: -0.29999998, y: 0.085}
+      - {x: -0.29999998, y: -0.095}
+      - {x: -0.11510575, y: -0.09898627}
+      - {x: -0.04910451, y: -0.018618338}
+      - {x: 0.099999994, y: -0.060672913}
+      - {x: 0.1847189, y: -0.03747017}
+      - {x: 0.29999998, y: -0.074999996}
+      - {x: 0.29999998, y: 0.044999998}
+--- !u!50 &7743460277398839088
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
+  m_GameObject: {fileID: 7743460277398839101}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
