@@ -36,7 +36,7 @@ public class Fire : MonoBehaviour
         for (int i = 0; i < startAmmo.Length; i++)
         {
             currentAmmo[i] = startAmmo[i];
-            print(currentAmmo[i]);
+            //print(currentAmmo[i]);
         }
     }
 
@@ -138,7 +138,7 @@ public class Fire : MonoBehaviour
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
-        print(currentAmmo[ammoIndex]);
+       // print(currentAmmo[ammoIndex]);
         UIHealthPanel.instance.UpdateAmmo();
         blast = Instantiate(smallBlast, start, Quaternion.identity);
         blast.transform.SetParent(this.transform);
@@ -155,7 +155,7 @@ public class Fire : MonoBehaviour
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
-        print(currentAmmo[ammoIndex]);
+        //print(currentAmmo[ammoIndex]);
         UIHealthPanel.instance.UpdateAmmo();
         GameObject changeBlast;
         if(fireRate == rates[4])

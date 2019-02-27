@@ -102,7 +102,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
             PlayerInteraction.instance.Hit(damage);
-            print("here1");
+            //print("here1");
         }
         if (collision.CompareTag("Laser"))
         {
@@ -128,7 +128,7 @@ public class EnemyMovement : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
-            print("enemy death");
+            //print("enemy death");
         }
     }   
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -156,7 +157,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space)
                 && (timer > Fire.instance.fireRate))
                 {
-                    print("gere");
+                    //print("gere");
                     timer = 0;
                     Fire.instance.GunFire();
 
@@ -225,7 +226,11 @@ public class PlayerController : MonoBehaviour
         // need to check if gun 0 is equipped
         // then check if gun 1 is equipped
         // then check if gun 2 is equipped
+        if (collision.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("Level1");
 
+        }
         if (collision.CompareTag("Pistol"))
         {
             if (Gun.instance.equiped)
