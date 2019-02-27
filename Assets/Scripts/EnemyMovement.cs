@@ -9,6 +9,8 @@ public class EnemyMovement : MonoBehaviour
     private bool move;
     public bool jump;
     public float speed;
+    public float hurtTimer = 0.1f;
+
 
     //public PlayerInteraction player;
     private Rigidbody2D rgbd;
@@ -22,12 +24,16 @@ public class EnemyMovement : MonoBehaviour
     private int currentSprite;
 
     private SpriteRenderer sp;
+    public SpriteRenderer[] sr;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rgbd = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
+        sr = GetComponentsInChildren<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -130,6 +136,37 @@ public class EnemyMovement : MonoBehaviour
     private void KnockBack(int distance)
     {
         rgbd.velocity = new Vector3(-distance, 0, 0) * speed * 3;
+        StartCoroutine(HurtRoutine());
+    }
+
+    IEnumerator HurtRoutine()
+    {
+        float timer = 0;
+        bool blink = false;
+        while (timer < hurtTimer)
+        {
+            blink = !blink;
+            timer += Time.deltaTime;
+            if (blink)
+            {
+                foreach (SpriteRenderer sprite in sr)
+                {
+                    sprite.color = Color.white;
+                }
+            }
+            else
+            {
+                foreach (SpriteRenderer sprite in sr)
+                {
+                    sprite.color = Color.red;
+                }
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+        foreach (SpriteRenderer sprite in sr)
+        {
+            sprite.color = Color.white;
+        }
     }
 
 
