@@ -41,8 +41,8 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 direction = new Vector2(5, 0);
-        Vector2 directionBack = new Vector2(-5, 0);
+        Vector2 direction = new Vector2(10, 0);
+        Vector2 directionBack = new Vector2(-10, 0);
         RaycastHit2D hitForward = Physics2D.Raycast(transform.position, direction, direction.magnitude, playerLayerMask);
         RaycastHit2D hitBack = Physics2D.Raycast(transform.position, directionBack, directionBack.magnitude, playerLayerMask);
 
