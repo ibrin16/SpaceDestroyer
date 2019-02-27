@@ -40,7 +40,7 @@ public class UIHealthPanel : MonoBehaviour
         Vector3 scaleHealth = UIImage.transform.localScale;
         scaleHealth.x = scale;
         UIImage.transform.localScale = scaleHealth;
-        print(scale);
+        //print(scale);
     }
     public void UpdateAmmo()
     {

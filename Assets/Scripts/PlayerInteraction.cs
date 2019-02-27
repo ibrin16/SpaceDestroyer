@@ -76,13 +76,6 @@ public class PlayerInteraction : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void OnTrigggerEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Finish"))
-        {
-            print("here");
-            SceneManager.LoadScene("Level1");
-        }
-    }
+
 
 }
