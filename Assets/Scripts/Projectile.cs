@@ -39,7 +39,6 @@ public class Projectile : MonoBehaviour
     {
         
         rgbd.velocity = new Vector3(xDir,yDir,0) * speed;
-        print(yDir);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
