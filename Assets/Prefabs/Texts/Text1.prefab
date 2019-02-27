@@ -79,4 +79,5 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Welcome to the front line soilder! You've been in cyro sleep for a while
-    so lets make sure everything still works. Press 'a' or 'd' to move.
+    so lets make sure everything still works. Press 'a'/'LeftArrow' or 'd'/'RightArrow'
+    to move.
