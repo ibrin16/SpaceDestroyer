@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
 
 
     //public PlayerController player;
-    protected SpriteRenderer sp;
+    public SpriteRenderer sp;
 
     private void Awake()
     {
@@ -77,7 +77,6 @@ public class Gun : MonoBehaviour
             {
                 SwitchGuns(2);
                 equipedGun = 2;
-             
                 UIHealthPanel.instance.UpdateAmmo();
 
 

@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDepth = 0.2f;
     public int groundCheckRayCount = 3;
     public LayerMask groundLayers = 0;
+    private int currentGun;
 
     bool grounded = false;
 
@@ -248,6 +249,7 @@ public class PlayerController : MonoBehaviour
                 gunsOn[0] = true;
                 Destroy(collision.gameObject);
                 Gun.instance.myGuns[0] = 0;
+                currentGun = 0;
                 if (AlreadyEquiped("Pistol"))
                 {
                     Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
@@ -275,24 +277,45 @@ public class PlayerController : MonoBehaviour
             gunsOn[1] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 1;
+            currentGun = 1;
+            if (AlreadyEquiped("Shotgun"))
+            {
+                Fire.instance.currentAmmo[1] = Fire.instance.startAmmo[1];
+            }
         }
         if (collision.CompareTag("AR"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 2;
+            currentGun = 2;
+            if (AlreadyEquiped("AR"))
+            {
+                Fire.instance.currentAmmo[2] = Fire.instance.startAmmo[2];
+            }
         }
         if (collision.CompareTag("Better AR"))
         {
+
             gunsOn[1] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 3;
+            currentGun = 3;
+            if (AlreadyEquiped("Better AR"))
+            {
+                Fire.instance.currentAmmo[3] = Fire.instance.startAmmo[3];
+            }
         }
         if (collision.CompareTag("RPG"))
         {
             gunsOn[1] = true;
             Destroy(collision.gameObject);
+            currentGun = 4;
             Gun.instance.myGuns[SlotFinder()] = 4;
+            if (AlreadyEquiped("RPG"))
+            {
+                Fire.instance.currentAmmo[4] = Fire.instance.startAmmo[4];
+            }
         }
         
 
@@ -317,6 +340,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             // then it should go to the equiped one
+            // the problem is the gun doesn't update till a button is pressed
+            print(currentGun);
+            // switch gun uses myguns which only has 3 max values
+            // so AR and RPG doesnt work
+            // want something that switches
+
+            // so switch all of it here
+            Gun.instance.equipedGun= currentGun;
+            Gun.instance.fireType = currentGun;
+            Gun.instance.sp.sprite = Gun.instance.difGuns[currentGun];
+            print (currentGun);
             return Gun.instance.equipedGun;
         }
     }
@@ -348,6 +382,22 @@ public class PlayerController : MonoBehaviour
             if (myGuns[i] == 0 && tag.Equals("Pistol"))
             {
                 print("here");  
+                return true;
+            }
+            if(myGuns[i] ==1 && tag.Equals("Shotgun"))
+            {
+                return true;
+            }
+            if (myGuns[i] == 2 && tag.Equals("AR"))
+            {
+                return true;
+            }
+            if (myGuns[i] == 3 && tag.Equals("Better AR"))
+            {
+                return true;
+            }
+            if (myGuns[i] == 4 && tag.Equals("RPG"))
+            {
                 return true;
             }
         }
