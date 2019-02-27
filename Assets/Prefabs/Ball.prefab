@@ -100,7 +100,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
-  explosionPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 6539454695460323337, guid: 5a79d82208c0231439fa5dc3253aa1fb,
+    type: 3}
   yDir: 0
 --- !u!50 &6595734388191751111
 Rigidbody2D:

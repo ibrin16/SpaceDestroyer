@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3154416378968385316}
   m_Layer: 0
   m_Name: Missle
-  m_TagString: Untagged
+  m_TagString: Missle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,8 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   speed: 5
+  xDir: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
   explosionPrefab: {fileID: 6539454695460323337, guid: 5a79d82208c0231439fa5dc3253aa1fb,
     type: 3}
+  yDir: 0
