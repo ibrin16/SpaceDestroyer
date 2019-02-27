@@ -9,6 +9,7 @@ public class TutorialGuide : MonoBehaviour
     public GameObject[] textPrefab;
     private GameObject text;
     private bool textSeen;
+    public GameObject background;
     
 
     // Start is called before the first frame update
@@ -28,9 +29,13 @@ public class TutorialGuide : MonoBehaviour
             Vector3 spawn = new Vector3(10, 10, 0);
             if(!textSeen)
             {
+                background = Instantiate(background, spawn, Quaternion.identity);
+                background.transform.SetParent(GameUICanvas.instance.transform);
+                background.transform.position += new Vector3(325, 300, 0);
                 text = Instantiate(textPrefab[number], spawn, Quaternion.identity);
                 text.transform.SetParent(GameUICanvas.instance.transform);
                 text.transform.position += new Vector3(325, 300,0);
+               
                 textSeen = true;
             }
             
@@ -38,6 +43,7 @@ public class TutorialGuide : MonoBehaviour
         if(leftHit.collider == null && text != null)
         {
             Destroy(text.gameObject);
+            Destroy(background.gameObject);
             textSeen = false;
         }
     }

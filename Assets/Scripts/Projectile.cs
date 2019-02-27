@@ -25,6 +25,10 @@ public class Projectile : MonoBehaviour
         {
             xDir = -1;
         }
+        if (PlayerController.instance.sp.flipX)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     // Update is called once per frame

@@ -139,20 +139,19 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space))
                 {
+                    timer += Time.deltaTime;
+                    if(timer > Fire.instance.fireRate)
+                    {
+                        Fire.instance.GunFire();
 
-                    Fire.instance.GunFire();
-                    //timer = 0;
+                        timer = 0;
+                    }
                 }
-                //}
             }
 
             if (!Gun.instance.auto)
             {
-                print(!Gun.instance.auto);
-                //timer += Time.deltaTime;
-                //if (timer >= Fire.instance.fireRate)
-                //{
-                // print(lastTimeFired);
+            
                 timer += Time.deltaTime;
                 if (Input.GetKeyDown(KeyCode.Space)
                 && (timer > Fire.instance.fireRate))
@@ -160,10 +159,8 @@ public class PlayerController : MonoBehaviour
                     print("gere");
                     timer = 0;
                     Fire.instance.GunFire();
-                    //timer = 0;
 
                 }
-                //}
             }
         }
         else
@@ -171,6 +168,9 @@ public class PlayerController : MonoBehaviour
             // show the dead sprite
             // have to edit the collider I think but thats hard and idk how to do it
             sp.sprite = PlayerInteraction.instance.death;
+            // want to just change the position of the sprite now the whole thing
+            Vector3 newPos = new Vector3(transform.position.x, transform.position.y, 0);
+            sp.transform.position = newPos;
         }
     }
 
@@ -233,6 +233,7 @@ public class PlayerController : MonoBehaviour
                 gunsOn[0] = true;
                 Destroy(collision.gameObject);
                 Gun.instance.myGuns[0] = 0;
+
             }
             else
             {
@@ -243,6 +244,8 @@ public class PlayerController : MonoBehaviour
 
                 Gun.instance.equiped = true;
                 Gun.instance.myGuns[SlotFinder()] = 0;
+                UIHealthPanel.instance.UpdateAmmo();
+
             }
 
         }

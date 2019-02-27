@@ -80,6 +80,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
+            print("here");
             SceneManager.LoadScene("Level1");
         }
     }

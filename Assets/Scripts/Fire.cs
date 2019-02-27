@@ -9,6 +9,11 @@ public class Fire : MonoBehaviour
     public Projectile misslePrefab;
     public float fireSide;
 
+    public GameObject largeBlast;
+    public GameObject smallBlast;
+    public float destroyTime;
+    private GameObject blast;
+
     public bool explosion;
 
     [HideInInspector]
@@ -51,6 +56,15 @@ public class Fire : MonoBehaviour
         {
             fireSide = -.75f;
         }
+        //if (blast != null)
+        //{
+        //    timer2 += Time.deltaTime;
+        //    if (timer2 >= destroyTime)
+        //    {
+        //        Destroy(blast);
+        //        print("here");
+        //    }
+        //}
     }
 
 
@@ -118,16 +132,20 @@ public class Fire : MonoBehaviour
     // also need to factor in fire rate
     public void Autofire()
     {
-        
+        // this is broken
+        //StartCoroutine(autoFire());
+        StartCoroutine(destrotyBlast());
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
         print(currentAmmo[ammoIndex]);
         UIHealthPanel.instance.UpdateAmmo();
-
-
-
-
+        blast = Instantiate(smallBlast, start, Quaternion.identity);
+        blast.transform.SetParent(this.transform);
+        if (!PlayerController.instance.sp.flipX)
+        {
+            blast.GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     // this needs to go in the correct direction
@@ -139,6 +157,35 @@ public class Fire : MonoBehaviour
         currentAmmo[ammoIndex] -= 1;
         print(currentAmmo[ammoIndex]);
         UIHealthPanel.instance.UpdateAmmo();
+        GameObject changeBlast;
+        if(fireRate == rates[4])
+        {
+            changeBlast = largeBlast;
+        }
+        else
+        {
+            changeBlast = smallBlast;
+        }
+        blast = Instantiate(changeBlast, start, Quaternion.identity);
+        blast.transform.SetParent(this.transform);
+        if (!PlayerController.instance.sp.flipX)
+        {
+            blast.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        StartCoroutine(destrotyBlast());
+        
+    }
 
+    // destroys the blast 
+    IEnumerator destrotyBlast()
+    {
+        yield return new WaitForSeconds(destroyTime);
+        Destroy(blast.gameObject);
+
+    }
+    public IEnumerator AutoFireCoroutine()
+    {
+        yield return new WaitForSeconds(fireRate);
+        
     }
 }

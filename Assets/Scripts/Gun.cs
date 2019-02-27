@@ -27,6 +27,8 @@ public class Gun : MonoBehaviour
 
     
 
+    
+
 
     //public PlayerController player;
     protected SpriteRenderer sp;
@@ -62,6 +64,7 @@ public class Gun : MonoBehaviour
             {
                 SwitchGuns(0);
                 equipedGun = 0;
+                UIHealthPanel.instance.UpdateAmmo();
 
 
             }
@@ -70,6 +73,8 @@ public class Gun : MonoBehaviour
             {
                 SwitchGuns(1);
                 equipedGun = 1;
+                UIHealthPanel.instance.UpdateAmmo();
+
 
 
             }
@@ -77,6 +82,8 @@ public class Gun : MonoBehaviour
             {
                 SwitchGuns(2);
                 equipedGun = 2;
+                UIHealthPanel.instance.UpdateAmmo();
+
 
             }
 

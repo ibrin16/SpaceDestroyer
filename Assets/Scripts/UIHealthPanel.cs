@@ -8,6 +8,7 @@ public class UIHealthPanel : MonoBehaviour
     public int health;
     public RectTransform UIImage;
     public Text ammoText;
+    public Text gunText;
 
     public static UIHealthPanel instance;
 
@@ -46,6 +47,25 @@ public class UIHealthPanel : MonoBehaviour
         float ammo = Fire.instance.currentAmmo[Fire.instance.ammoIndex];
         float maxAmmo = Fire.instance.startAmmo[Fire.instance.ammoIndex];
         ammoText.text = ammo + "/" + maxAmmo;
-        
+        string gun = "";
+        switch (Fire.instance.ammoIndex)
+        {
+            case 0:
+                gun = "Pistol: ";
+                break;
+            case 1:
+                gun = "Shotgun: ";
+                break;
+            case 2:
+                gun = "SMG: ";
+                break;
+            case 3:
+                gun = "AR: ";
+                break;
+            case 4:
+                gun = "RPG: ";
+                break;
+        }
+        gunText.text = gun;
     }
 }
