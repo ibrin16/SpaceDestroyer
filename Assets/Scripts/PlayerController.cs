@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private int currentSprite = 0;
     private float switchTime = 0;
     public float deltaX = 0;
-    public bool[] gunsOn;
+    public bool gunsOn = false;
 
     public bool canMove = true;
 
@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
     public Gun equipedActualGun;
     public GameObject equipedGun;
     private float timer = 0;
-    
- 
- 
+
+
+
     //public float jumpTakeoff;
     //private float normalSpeed = 5;
     //private float jumpSpeed;
@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
     public int groundCheckRayCount = 3;
     public LayerMask groundLayers = 0;
     private int currentGun;
+
+    public bool key1;
+    public bool key2;
+    public bool key3;
 
     bool grounded = false;
 
@@ -66,13 +70,14 @@ public class PlayerController : MonoBehaviour
         //normalSpeed = speed;
         //jumpSpeed = speed / 2;
         // = PlayerInteraction.instance.equipedGun;
-        gunsOn = new bool[] { false, false, false, false, false, false };
         canMove = true;
+        gunsOn = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        print(gunsOn);
         if (PlayerInteraction.instance.health > 0)
         {
 
@@ -81,7 +86,7 @@ public class PlayerController : MonoBehaviour
             {
                 sp.sprite = sprites[3];
             }
-                
+
             Vector2 vel = rgbd.velocity;
             vel.x = 0;
             //vel.y = 0;
@@ -137,7 +142,7 @@ public class PlayerController : MonoBehaviour
             }
             vel.y += -gravity * Time.deltaTime;
             rgbd.velocity = vel;
-            if(vel.x == 0 && grounded)
+            if (vel.x == 0 && grounded)
             {
                 sp.sprite = sprites[1];
             }
@@ -151,7 +156,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space))
                 {
                     timer += Time.deltaTime;
-                    if(timer > Fire.instance.fireRate)
+                    if (timer > Fire.instance.fireRate)
                     {
                         Fire.instance.GunFire();
 
@@ -162,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
             if (!Gun.instance.auto)
             {
-            
+
                 timer += Time.deltaTime;
                 if (Input.GetKeyDown(KeyCode.Space)
                 && (timer > Fire.instance.fireRate))
@@ -182,15 +187,15 @@ public class PlayerController : MonoBehaviour
             // want to just change the position of the sprite now the whole thing
             Vector3 newPos = new Vector3(transform.position.x, transform.position.y, 0);
             sp.transform.position = newPos;
-       
+
         }
     }
 
-    
+
     /// <summary>
     /// Functions to implement jumping
     /// </summary>
-    Vector2 ApplyJump (Vector2 vel)
+    Vector2 ApplyJump(Vector2 vel)
     {
         vel.y = jumpVelocity;
         lastJumpTime = Time.time;
@@ -198,19 +203,11 @@ public class PlayerController : MonoBehaviour
         return vel;
     }
 
-    bool PermissionToJump ()
+    bool PermissionToJump()
     {
         bool wasJustGrounded = Time.time < lostGroundingTime + groundingToleranceTimer;
         bool hasJustJumped = Time.time <= lastJumpTime + Time.deltaTime;
         return (grounded || wasJustGrounded) && !hasJustJumped;
-    }
-
-
-    public void Knockback (Vector2 force)
-    {
-        rgbd.velocity = force;
-        lastJumpTime = Time.time;
-        grounded = false;
     }
 
     void UpdateGrounding()
@@ -242,6 +239,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         // need to check if gun 0 is equipped
         // then check if gun 1 is equipped
         // then check if gun 2 is equipped
@@ -250,11 +248,13 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Level1");
 
         }
+        // maybe keep track of the last pressed number and then automatically press it again
         if (collision.CompareTag("Pistol"))
         {
-            if (Gun.instance.equiped)
+            if (gunsOn)
             {
-                gunsOn[0] = true;
+                print("here");
+                //gunsOn[0] = true;
                 Destroy(collision.gameObject);
                 Gun.instance.myGuns[0] = 0;
                 currentGun = 0;
@@ -263,10 +263,11 @@ public class PlayerController : MonoBehaviour
                     Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
                 }
 
+
             }
             else
             {
-                gunsOn[0] = true;
+                gunsOn = true;
                 equipedGun = collision.gameObject;
                 equipedGun.transform.SetParent(transform);
                 equipedGun.transform.position = transform.position + Vector3.right * 0.5f;
@@ -282,7 +283,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("Shotgun"))
         {
-            gunsOn[1] = true;
+            //gunsOn[1] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 1;
             currentGun = 1;
@@ -293,7 +294,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("AR"))
         {
-            gunsOn[1] = true;
+            //gunsOn[2] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 2;
             currentGun = 2;
@@ -305,7 +306,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Better AR"))
         {
 
-            gunsOn[1] = true;
+            //gunsOn[3] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[SlotFinder()] = 3;
             currentGun = 3;
@@ -314,9 +315,10 @@ public class PlayerController : MonoBehaviour
                 Fire.instance.currentAmmo[3] = Fire.instance.startAmmo[3];
             }
         }
+
         if (collision.CompareTag("RPG"))
         {
-            gunsOn[1] = true;
+            //gunsOn[4] = true;
             Destroy(collision.gameObject);
             currentGun = 4;
             Gun.instance.myGuns[SlotFinder()] = 4;
@@ -325,7 +327,9 @@ public class PlayerController : MonoBehaviour
                 Fire.instance.currentAmmo[4] = Fire.instance.startAmmo[4];
             }
         }
-        
+        //Repress(Gun.instance.last);
+
+
 
     }
     private int SlotFinder()
@@ -355,10 +359,14 @@ public class PlayerController : MonoBehaviour
             // want something that switches
 
             // so switch all of it here
-            Gun.instance.equipedGun= currentGun;
+            //Gun.instance.equipedGun = currentGun;
             Gun.instance.fireType = currentGun;
             Gun.instance.sp.sprite = Gun.instance.difGuns[currentGun];
-            print (currentGun);
+            print(currentGun);
+            foreach (int i in Gun.instance.myGuns)
+            {
+                print(i);
+            }
             return Gun.instance.equipedGun;
         }
     }
@@ -389,10 +397,10 @@ public class PlayerController : MonoBehaviour
             // if it is a pistol and the gun just grabbed has pistol tag
             if (myGuns[i] == 0 && tag.Equals("Pistol"))
             {
-                print("here");  
+                print("here");
                 return true;
             }
-            if(myGuns[i] ==1 && tag.Equals("Shotgun"))
+            if (myGuns[i] == 1 && tag.Equals("Shotgun"))
             {
                 return true;
             }
@@ -410,6 +418,22 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    void Repress(int last)
+    {
+        if(last == 1)
+        {
+            key1 = true;
+        }
+        if (last == 2)
+        {
+            key2 = true;
+        }
+        else
+        {
+            key3 = true;
+        }
     }
 
 }

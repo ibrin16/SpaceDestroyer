@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         {
             boss = true;
         }
-        print(boss);
+        //print(boss);
         if (dead && boss)
         {
             SceneManager.LoadScene("EndGame");
@@ -134,7 +134,7 @@ public class EnemyMovement : MonoBehaviour
             //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
         }
-        if (collision.CompareTag("RPG")){
+        if (collision.CompareTag("Missle")){
             Hit(5);
             //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);

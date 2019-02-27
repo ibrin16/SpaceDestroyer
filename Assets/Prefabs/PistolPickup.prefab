@@ -100,6 +100,8 @@ MonoBehaviour:
     type: 3}
   misslePrefab: {fileID: 3154416378968385316, guid: dae2a9f6ad5512049a98fbe37eee4a1d,
     type: 3}
+  top: {fileID: 0}
+  bottom: {fileID: 0}
   fireSide: 0
   largeBlast: {fileID: 282133004897939539, guid: 4f7683883fb8d50438fe7e73a0d65793,
     type: 3}
@@ -109,11 +111,11 @@ MonoBehaviour:
   explosion: 1
   current: {fileID: 0}
   rates:
-  - 0.6
-  - 3
+  - 0.3
+  - 1
+  - 0.3
   - 0.2
-  - 0.4
-  - 5
+  - 3
   fireRate: 0
   timer: 0
   startAmmo:
@@ -141,8 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c88103b15580343909ae5a920f1b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 10
-  clipAmmo: 10
   fireRate: 0
   magSize: 0
   magIncrease: 0
@@ -160,6 +160,8 @@ MonoBehaviour:
   fireType: 0
   myGuns: 
   equipedGun: 0
+  last: 0
+  sp: {fileID: 0}
 --- !u!58 &1892817548
 CircleCollider2D:
   m_ObjectHideFlags: 0

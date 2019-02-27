@@ -19,7 +19,7 @@ public class ExplosionAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timerCheck >= waitTime * 5) 
+        if (timerCheck >= waitTime * 4) 
         {
             Destroy(this.gameObject);
         }

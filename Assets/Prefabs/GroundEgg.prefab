@@ -116,10 +116,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 0
-  speed: 0.5
+  speed: 2
   hurtTimer: 0.1
-  health: 8
-  damage: 8
+  playerKnockBackForce: 20
+  health: 10
+  damage: 20
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512

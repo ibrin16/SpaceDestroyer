@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Knockback (Vector2 force)
     {
-        PlayerController.instance.Knockback(force);
+        //PlayerController.instance.Knockback(force);
         StartCoroutine(KnockBackRoutine());
     }
 
@@ -87,7 +87,7 @@ public class PlayerInteraction : MonoBehaviour
     IEnumerator RestartTheGameAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("MainMenu");
     }
 
 

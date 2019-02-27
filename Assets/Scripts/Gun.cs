@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
 
     public int[] myGuns;
     public int equipedGun;
-
+    public int last;
     
 
     
@@ -50,7 +50,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.instance.gunsOn[0])
+        if (PlayerController.instance.gunsOn)
         {
             equiped = true;
         }
@@ -59,26 +59,32 @@ public class Gun : MonoBehaviour
         // what if just had one object that changed sprites and shooting style
         if (PlayerController.instance.equipedGun != null)
         {
-
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            // maybe instead look if they are all full if they are then destroy the current thing
+            if (Input.GetKeyDown(KeyCode.Alpha1) || PlayerController.instance.key1)
             {
                 SwitchGuns(0);
                 equipedGun = 0;               
                 UIHealthPanel.instance.UpdateAmmo();
+                PlayerController.instance.key1 = false;
+                last = 1;
+
             }
             // equip the shotgun
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2) || PlayerController.instance.key2)
             {
                 SwitchGuns(1);
                 equipedGun = 1;
                 UIHealthPanel.instance.UpdateAmmo();
+                last = 2;
+                PlayerController.instance.key2 = false;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Alpha3) || PlayerController.instance.key3)
             {
                 SwitchGuns(2);
                 equipedGun = 2;
                 UIHealthPanel.instance.UpdateAmmo();
-
+                last = 3;
+                PlayerController.instance.key3 = false;
 
             }
 

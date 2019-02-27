@@ -17,6 +17,7 @@ TagManager:
   - Snake
   - BossAlien
   - GroundEgg
+  - Missle
   layers:
   - Default
   - TransparentFX
