@@ -56,11 +56,11 @@ public class EnemyMovement : MonoBehaviour
             float deltaY = 0;
             if(PlayerInteraction.instance.transform.position.x < transform.position.x)
             {
-                deltaX = -1;
+                deltaX = -1 * speed;
             }
             if (PlayerInteraction.instance.transform.position.x > transform.position.x)
             {
-                deltaX = 1;
+                deltaX = 1 * speed;
             }
             rgbd.velocity = new Vector3(deltaX, deltaY, 0);
         }
@@ -90,19 +90,15 @@ public class EnemyMovement : MonoBehaviour
                 time = 0;
             }
         }
-
-
-
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
         // maybe should shoot a ray cast to hit the player instead
         // may work better
     {
+        //look into this more
         if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
             PlayerInteraction.instance.Hit(damage);
-            //print("here1");
         }
         if (collision.CompareTag("Laser"))
         {
@@ -121,10 +117,10 @@ public class EnemyMovement : MonoBehaviour
 
         }
     }
-    private void Hit(int damage)
+    private void Hit(int hitDamage)
     {
         //KnockBack(knockback);
-        health -= damage;
+        health -= hitDamage;
         StartCoroutine(HurtRoutine());
         if (health <= 0)
         {

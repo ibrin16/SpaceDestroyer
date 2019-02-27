@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6560173778491936770}
   m_Layer: 0
   m_Name: GroundEgg
-  m_TagString: Untagged
+  m_TagString: GroundEgg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,8 +151,8 @@ MonoBehaviour:
   jump: 0
   speed: 0.5
   hurtTimer: 0.1
-  health: 40
-  damage: 40
+  health: 8
+  damage: 8
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512

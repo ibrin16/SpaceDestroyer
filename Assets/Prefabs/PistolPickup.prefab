@@ -106,10 +106,10 @@ MonoBehaviour:
   smallBlast: {fileID: 583064898438375672, guid: b0f9024364fd377449599d7cb07b14cf,
     type: 3}
   destroyTime: 0.1
-  explosion: 0
+  explosion: 1
   current: {fileID: 0}
   rates:
-  - 0.5
+  - 0.6
   - 3
   - 0.2
   - 0.4
@@ -117,9 +117,9 @@ MonoBehaviour:
   fireRate: 0
   timer: 0
   startAmmo:
+  - 10
+  - 8
   - 30
-  - 15
-  - 50
   - 60
   - 5
   currentAmmo:

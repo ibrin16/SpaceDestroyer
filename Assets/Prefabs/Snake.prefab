@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3515616214800145}
   - component: {fileID: 3515616214800150}
   m_Layer: 0
-  m_Name: AlienSnake_3
+  m_Name: Snake
   m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515616214800154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.7179, y: 0.8307, z: 0}
+  m_LocalScale: {x: 1.0228, y: 1.0306, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 0
-  speed: 5
+  speed: 1
   hurtTimer: 0.1
-  health: 5
-  damage: 25
+  health: 3
+  damage: 5
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -141,8 +141,9 @@ PolygonCollider2D:
       - {x: -0.5166667, y: -0.35000002}
       - {x: 0.78333336, y: -0.35000002}
       - {x: 0.73589814, y: -0.062613994}
-      - {x: 0.15176272, y: -0.13788646}
-      - {x: -0.18941998, y: -0.027102679}
+      - {x: 0.6894547, y: 0.26406285}
+      - {x: 0.3571018, y: 0.4148397}
+      - {x: 0.048002366, y: 0.0352687}
 --- !u!50 &3515616214800150
 Rigidbody2D:
   serializedVersion: 4
