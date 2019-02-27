@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
     private float knockStunTime = 1f;
     private bool dead = false;
     private bool boss = false;
-    public float knockBackForce = 20;
+    public float playerKnockBackForce = 20;
 
     //public PlayerInteraction player;
     private Rigidbody2D rgbd;
@@ -120,6 +120,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
             PlayerInteraction.instance.Hit(damage);
+            PlayerInteraction.instance.Knockback(knockBackDir * playerKnockBackForce);
         }
         if (collision.CompareTag("Laser"))
         {

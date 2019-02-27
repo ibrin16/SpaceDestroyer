@@ -9,6 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     public static PlayerInteraction instance;
     //public GameObject equipedGun;
     public float hurtTimer = 0.1f;
+    float knockStunTime = 0.5f;
     public SpriteRenderer[] sr;
     Coroutine hurtRoutine;
     public Sprite death;
@@ -40,6 +41,19 @@ public class PlayerInteraction : MonoBehaviour
             StopCoroutine(hurtRoutine);
         }
         hurtRoutine = StartCoroutine(HurtRoutine());
+    }
+
+    public void Knockback (Vector2 force)
+    {
+        PlayerController.instance.Knockback(force);
+        StartCoroutine(KnockBackRoutine());
+    }
+
+    IEnumerator KnockBackRoutine()
+    {
+        PlayerController.instance.canMove = false;
+        yield return new WaitForSeconds(knockStunTime);
+        PlayerController.instance.canMove = true;
     }
 
     IEnumerator HurtRoutine ()

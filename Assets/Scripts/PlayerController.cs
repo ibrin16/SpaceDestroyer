@@ -205,6 +205,14 @@ public class PlayerController : MonoBehaviour
         return (grounded || wasJustGrounded) && !hasJustJumped;
     }
 
+
+    public void Knockback (Vector2 force)
+    {
+        rgbd.velocity = force;
+        lastJumpTime = Time.time;
+        grounded = false;
+    }
+
     void UpdateGrounding()
     {
         Vector2 groudCheckCenter = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
