@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer sp;
     public Sprite[] sprites;
     //public Sprite death;
-    public AudioClip jumpSound;
+    //public AudioClip jumpSound;
 
     private Rigidbody2D rgbd;
     public float animationTime;
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             //jump
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
             {
-                AudioSource.PlayClipAtPoint(jumpSound, transform.position);
+                //AudioSource.PlayClipAtPoint(jumpSound, transform.position);
                 vel = ApplyJump(vel);
 
             }
