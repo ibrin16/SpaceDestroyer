@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     public SpriteRenderer sp;
     public Sprite[] sprites;
+    //public Sprite death;
+
     private Rigidbody2D rgbd;
     public float animationTime;
     private int currentSprite = 0;
@@ -68,69 +70,72 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateGrounding();
-        //print(grounded);
-
-        Vector2 vel = rgbd.velocity;
-        vel.x = 0;
-        //vel.y = 0;
-
-        // move the player
-       if((Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.LeftArrow)))
+        if (PlayerInteraction.instance.health > 0)
         {
-            //print(equipedGun);
-            vel.x = -1 * speed;
-            sp.flipX = false;
-            // if the equiped gun is not null then flip it
-            
-            if (equipedGun != null)
+
+            UpdateGrounding();
+            //print(grounded);
+
+            Vector2 vel = rgbd.velocity;
+            vel.x = 0;
+            //vel.y = 0;
+
+            // move the player
+            if ((Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.LeftArrow)))
             {
+                //print(equipedGun);
+                vel.x = -1 * speed;
+                sp.flipX = false;
+                // if the equiped gun is not null then flip it
+
+                if (equipedGun != null)
+                {
                     equipedGun.GetComponent<SpriteRenderer>().flipX = false;
                     equipedGun.transform.position = this.transform.position + new Vector3(-.5f, 0, 0);
                     Fire.instance.fireSide = -.75f;
+                }
+                switchTime += Time.deltaTime;
+                if (switchTime >= animationTime)
+                {
+                    currentSprite = (currentSprite + 1) % sprites.Length;
+                    sp.sprite = sprites[currentSprite];
+                    switchTime = 0;
+                }
+
             }
-            switchTime += Time.deltaTime;
-            if(switchTime >= animationTime)
+            if ((Input.GetKey(KeyCode.D)) || (Input.GetKey(KeyCode.RightArrow)))
             {
-                currentSprite = (currentSprite + 1)%sprites.Length;
-                sp.sprite = sprites[currentSprite];
-                switchTime = 0;
+                vel.x = 1 * speed;
+                sp.flipX = true;
+                if (equipedGun != null)
+                {
+                    equipedGun.GetComponent<SpriteRenderer>().flipX = true;
+                    equipedGun.transform.position = this.transform.position + new Vector3(.5f, 0, 0);
+                    Fire.instance.fireSide = .75f;
+                }
+                switchTime += Time.deltaTime;
+                if (switchTime >= animationTime)
+                {
+                    currentSprite = (currentSprite + 1) % sprites.Length;
+                    sp.sprite = sprites[currentSprite];
+                    switchTime = 0;
+                }
             }
 
-        }
-        if ((Input.GetKey(KeyCode.D)) || (Input.GetKey(KeyCode.RightArrow)))
-        {
-            vel.x = 1 * speed;
-            sp.flipX = true;
-            if (equipedGun != null)
+            //jump
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
             {
-                equipedGun.GetComponent<SpriteRenderer>().flipX = true;
-                equipedGun.transform.position = this.transform.position + new Vector3(.5f, 0, 0);
-                Fire.instance.fireSide = .75f;
+                vel = ApplyJump(vel);
+
             }
-            switchTime += Time.deltaTime;
-            if (switchTime >= animationTime)
+            vel.y += -gravity * Time.deltaTime;
+            rgbd.velocity = vel;
+
+            if (Gun.instance.auto)
             {
-                currentSprite = (currentSprite + 1) % sprites.Length;
-                sp.sprite = sprites[currentSprite];
-                switchTime = 0;
-            }
-        }
-
-        //jump
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
-        {
-            vel = ApplyJump(vel);
-
-        }
-        vel.y += -gravity * Time.deltaTime;
-        rgbd.velocity = vel;
-
-        if (Gun.instance.auto)
-        {
-            //timer += Time.deltaTime;
-            //if (timer >= Fire.instance.fireRate)
-            //{
+                //timer += Time.deltaTime;
+                //if (timer >= Fire.instance.fireRate)
+                //{
 
                 if (Input.GetKey(KeyCode.Space))
                 {
@@ -138,27 +143,34 @@ public class PlayerController : MonoBehaviour
                     Fire.instance.GunFire();
                     //timer = 0;
                 }
-            //}
-        }
+                //}
+            }
 
-        if (!Gun.instance.auto)
-        {
-            print(!Gun.instance.auto);
-            //timer += Time.deltaTime;
-            //if (timer >= Fire.instance.fireRate)
-            //{
-           // print(lastTimeFired);
-            timer += Time.deltaTime;
-                if (Input.GetKeyDown(KeyCode.Space) 
+            if (!Gun.instance.auto)
+            {
+                print(!Gun.instance.auto);
+                //timer += Time.deltaTime;
+                //if (timer >= Fire.instance.fireRate)
+                //{
+                // print(lastTimeFired);
+                timer += Time.deltaTime;
+                if (Input.GetKeyDown(KeyCode.Space)
                 && (timer > Fire.instance.fireRate))
                 {
-                print("gere");
+                    print("gere");
                     timer = 0;
                     Fire.instance.GunFire();
                     //timer = 0;
 
                 }
-            //}
+                //}
+            }
+        }
+        else
+        {
+            // show the dead sprite
+            // have to edit the collider I think but thats hard and idk how to do it
+            sp.sprite = PlayerInteraction.instance.death;
         }
     }
 

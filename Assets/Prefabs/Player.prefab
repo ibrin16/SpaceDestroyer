@@ -280,6 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  hurtTimer: 0.1
+  sr: []
+  death: {fileID: 21300034, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
 --- !u!114 &8015940822184054288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  sp: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300002, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}

@@ -25,6 +25,8 @@ public class Gun : MonoBehaviour
     public int[] myGuns;
     public int equipedGun;
 
+    
+
 
     //public PlayerController player;
     protected SpriteRenderer sp;
@@ -32,6 +34,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
     }
 
     // Start is called before the first frame update

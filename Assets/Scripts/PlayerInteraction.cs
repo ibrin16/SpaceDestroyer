@@ -10,7 +10,8 @@ public class PlayerInteraction : MonoBehaviour
     //public GameObject equipedGun;
     public float hurtTimer = 0.1f;
     public SpriteRenderer[] sr;
-    Coroutine hurtRoutine; 
+    Coroutine hurtRoutine;
+    public Sprite death;
 
 
 
@@ -30,7 +31,6 @@ public class PlayerInteraction : MonoBehaviour
         if (health <= 0)
         {
             StartCoroutine(RestartTheGameAfterSeconds(1));
-            print("death");
             // reload current scene
         }
 

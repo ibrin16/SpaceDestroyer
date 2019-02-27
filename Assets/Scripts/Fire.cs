@@ -19,11 +19,25 @@ public class Fire : MonoBehaviour
     public float fireRate;
     public float timer;
 
+    public float[] startAmmo;
+    public float[] currentAmmo;
+    public int ammoIndex;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
+        for (int i = 0; i < startAmmo.Length; i++)
+        {
+            currentAmmo[i] = startAmmo[i];
+            print(currentAmmo[i]);
+        }
+    }
+
+    private void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -52,39 +66,47 @@ public class Fire : MonoBehaviour
                     current = laserPrefab;
                     explosion = false;
                     fireRate = rates[0];
+                    ammoIndex = 0;
                     break;
 
                 case 1:
                     current = ballPrefab;
                     explosion = false;
                     fireRate = rates[1];
+                    ammoIndex = 1;
+
                     break;
 
                 case 2:
                     current = laserPrefab;
                     explosion = false;
                     fireRate = rates[2];
+                    ammoIndex = 2;
+
                     break;
 
                 case 3:
                     current = ballPrefab;
                     explosion = false;
                     fireRate = rates[3];
+                    ammoIndex = 3;
+
                     break;
 
                 case 4:
                     current = misslePrefab;
                     explosion = true;
                     fireRate = rates[4];
+                    ammoIndex = 4;
+
                     break;
             }
-            //StartCoroutine(FireGunCorutine());
-            if (Gun.instance.auto)
+            if (Gun.instance.auto && currentAmmo[ammoIndex] > 0) 
             {
                 Autofire();
             }
 
-            if (!Gun.instance.auto)
+            if (!Gun.instance.auto && currentAmmo[ammoIndex] > 0)
             {
                 Singlefire();
             }
@@ -97,22 +119,26 @@ public class Fire : MonoBehaviour
     public void Autofire()
     {
         
-            Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
-            Projectile shot = Instantiate(current, start, Quaternion.identity);
-        
-        
+        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
+        Projectile shot = Instantiate(current, start, Quaternion.identity);
+        currentAmmo[ammoIndex] -= 1;
+        print(currentAmmo[ammoIndex]);
+        UIHealthPanel.instance.UpdateAmmo();
+
+
+
+
     }
 
     // this needs to go in the correct direction
     public void Singlefire()
     {
      
-            Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
-            Projectile shot = Instantiate(current, start, Quaternion.identity);
-    }
+        Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
+        Projectile shot = Instantiate(current, start, Quaternion.identity);
+        currentAmmo[ammoIndex] -= 1;
+        print(currentAmmo[ammoIndex]);
+        UIHealthPanel.instance.UpdateAmmo();
 
-    //IEnumerator FireGunCorutine()
-    //{
-    //    yield return new WaitForSeconds(fireRate);
-    //}
+    }
 }

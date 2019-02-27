@@ -109,7 +109,20 @@ MonoBehaviour:
   - 3
   - 4
   - 1
+  fireRate: 0
   timer: 0
+  startAmmo:
+  - 30
+  - 15
+  - 50
+  - 60
+  - 5
+  currentAmmo:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!114 &2861101517500478805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +154,8 @@ MonoBehaviour:
   fireType: 0
   myGuns: 
   equipedGun: 0
+  startAmmo: []
+  currentAmmo: []
 --- !u!58 &1892817548
 CircleCollider2D:
   m_ObjectHideFlags: 0

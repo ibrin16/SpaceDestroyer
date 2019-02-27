@@ -7,6 +7,7 @@ public class UIHealthPanel : MonoBehaviour
 {
     public int health;
     public RectTransform UIImage;
+    public Text ammoText;
 
     public static UIHealthPanel instance;
 
@@ -40,5 +41,11 @@ public class UIHealthPanel : MonoBehaviour
         UIImage.transform.localScale = scaleHealth;
         print(scale);
     }
-    
+    public void UpdateAmmo()
+    {
+        float ammo = Fire.instance.currentAmmo[Fire.instance.ammoIndex];
+        float maxAmmo = Fire.instance.startAmmo[Fire.instance.ammoIndex];
+        ammoText.text = ammo + "/" + maxAmmo;
+        
+    }
 }
