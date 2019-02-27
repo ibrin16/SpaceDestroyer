@@ -8,13 +8,16 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
     private Rigidbody2D rgbd;
     public float speed;
-    private int xDir;
+    public float xDir;
     public LayerMask wallLayer;
     public GameObject explosionPrefab;
+    public float yDir;
+    //public Vector2 direction;
     // need to make it so the object is destroyed on collision
     // Start is called before the first frame update
     void Start()
     {
+        //yDir = 0;
         rgbd = GetComponent<Rigidbody2D>();
         direction.Normalize();
         if (PlayerController.instance.GetComponent<SpriteRenderer>().flipX)
@@ -35,7 +38,8 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         
-        rgbd.velocity = new Vector3(xDir,0,0) * speed;
+        rgbd.velocity = new Vector3(xDir,yDir,0) * speed;
+        print(yDir);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

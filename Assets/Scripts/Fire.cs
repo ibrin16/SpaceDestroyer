@@ -7,6 +7,8 @@ public class Fire : MonoBehaviour
     public Projectile laserPrefab;
     public Projectile ballPrefab;
     public Projectile misslePrefab;
+    public Projectile top;
+    public Projectile bottom;
     public float fireSide;
 
     public GameObject largeBlast;
@@ -77,7 +79,7 @@ public class Fire : MonoBehaviour
             switch (Gun.instance.fireType)
             {
                 case 0:
-                    current = laserPrefab;
+                    current = ballPrefab;
                     explosion = false;
                     fireRate = rates[0];
                     ammoIndex = 0;
@@ -100,7 +102,7 @@ public class Fire : MonoBehaviour
                     break;
 
                 case 3:
-                    current = ballPrefab;
+                    current = laserPrefab;
                     explosion = false;
                     fireRate = rates[3];
                     ammoIndex = 3;
@@ -146,6 +148,7 @@ public class Fire : MonoBehaviour
         {
             blast.GetComponent<SpriteRenderer>().flipX = true;
         }
+      
     }
 
     // this needs to go in the correct direction
@@ -158,7 +161,19 @@ public class Fire : MonoBehaviour
         //print(currentAmmo[ammoIndex]);
         UIHealthPanel.instance.UpdateAmmo();
         GameObject changeBlast;
-        if(fireRate == rates[4])
+        if (fireRate == rates[1])
+        {
+            // then it is a shotgun and needs to shoot three shots
+            top = Instantiate(current, start, Quaternion.identity);
+            top.yDir = .25f;
+
+            bottom = Instantiate(current, start, Quaternion.identity);
+            bottom.yDir = -.25f;
+
+
+
+        }
+        if (fireRate == rates[4])
         {
             changeBlast = largeBlast;
         }

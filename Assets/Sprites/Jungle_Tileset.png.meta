@@ -516,32 +516,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jungle_Tileset_20
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 640
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f576eb0eb311ff4e88855006fe5bf96
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Jungle_Tileset_21
       rect:
         serializedVersion: 2
-        x: 640
+        x: 513
         y: 640
-        width: 128
+        width: 255
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -556,32 +536,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jungle_Tileset_22
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 640
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32e3065e87cc28141b366626142f1a44
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Jungle_Tileset_23
       rect:
         serializedVersion: 2
-        x: 896
+        x: 776
         y: 640
-        width: 128
+        width: 248
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -716,32 +676,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jungle_Tileset_30
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 512
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d3fac524d2364f44b49c8a718414174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Jungle_Tileset_31
       rect:
         serializedVersion: 2
-        x: 896
+        x: 776
         y: 512
-        width: 128
+        width: 248
         height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

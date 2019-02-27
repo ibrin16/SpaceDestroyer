@@ -13,7 +13,6 @@ public class GunSpawner : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         int choice = Random.Range(0, 100);
-        //choice = 61;
         if(choice <= 35)
         {
             gun = "Pistol";
