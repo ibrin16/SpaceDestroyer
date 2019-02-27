@@ -12,12 +12,13 @@ public class PlayerController : MonoBehaviour
     //public Sprite death;
     //public AudioClip jumpSound;
 
-    private Rigidbody2D rgbd;
+    public Rigidbody2D rgbd;
     public float animationTime;
     private int currentSprite = 0;
     private float switchTime = 0;
     public float deltaX = 0;
     public bool gunsOn = false;
+    public bool moveable;
 
     public bool canMove = true;
 
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
         // = PlayerInteraction.instance.equipedGun;
         canMove = true;
         gunsOn = false;
+        moveable = true;
     }
 
     // Update is called once per frame
@@ -86,6 +88,8 @@ public class PlayerController : MonoBehaviour
             {
                 sp.sprite = sprites[3];
             }
+            if (moveable)
+            {
 
             Vector2 vel = rgbd.velocity;
             vel.x = 0;
@@ -146,6 +150,8 @@ public class PlayerController : MonoBehaviour
             {
                 sp.sprite = sprites[1];
             }
+            }
+
 
             if (Gun.instance.auto)
             {
@@ -184,6 +190,7 @@ public class PlayerController : MonoBehaviour
             // show the dead sprite
             // have to edit the collider I think but thats hard and idk how to do it
             sp.sprite = PlayerInteraction.instance.death;
+            rgbd.velocity = new Vector3(0, 0, 0);
             // want to just change the position of the sprite now the whole thing
             Vector3 newPos = new Vector3(transform.position.x, transform.position.y, 0);
             sp.transform.position = newPos;

@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 0
-  speed: 6
+  speed: 4
   hurtTimer: 0.1
   playerKnockBackForce: 20
   health: 5

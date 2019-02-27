@@ -103,5 +103,7 @@ MonoBehaviour:
   - {fileID: 8530084612165513615, guid: f35bde16af4154d4c9b4bda217ff3d8f, type: 3}
   - {fileID: 6079983098551508632, guid: 32be075d8c9311a41b656b822f240a5d, type: 3}
   - {fileID: 4951943327717294621, guid: facd0275d09d71c4585c5c446d99f86b, type: 3}
+  - {fileID: 3510776182606559963, guid: 09bcf58a6d3ea104cb5e423d86d98543, type: 3}
+  - {fileID: 3994612296822998351, guid: 344a7847672ea4e499d90de4d489b9db, type: 3}
   background: {fileID: 2115251263689567564, guid: e7511b50b38eba74f9d11d386c9b1083,
     type: 3}

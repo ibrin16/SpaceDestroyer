@@ -38,6 +38,10 @@ public class UIHealthPanel : MonoBehaviour
         }
 
         health = PlayerInteraction.instance.health;
+        if (health < 0)
+        {
+            health = 0;
+        }
         float scale = (float)health / 100f;
         Vector3 scaleHealth = UIImage.transform.localScale;
         scaleHealth.x = scale;

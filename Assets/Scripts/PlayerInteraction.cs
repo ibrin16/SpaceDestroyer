@@ -13,6 +13,8 @@ public class PlayerInteraction : MonoBehaviour
     public SpriteRenderer[] sr;
     Coroutine hurtRoutine;
     public Sprite death;
+    public bool left;
+    private bool hurtable;
 
 
 
@@ -21,49 +23,77 @@ public class PlayerInteraction : MonoBehaviour
     {
         instance = this;
         sr = GetComponents<SpriteRenderer>();
+        hurtable = true;
     }
 
     public void Hit(int damage)
     {
-        // need to also implement the health bar changing
-        health -= damage;
-        UIHealthPanel.instance.UpdateHealth();
-
-        if (health <= 0)
+        if (hurtable)
         {
-            StartCoroutine(RestartTheGameAfterSeconds(1));
-            // reload current scene
-        }
+            // need to also implement the health bar changing
+            health -= damage;
+            UIHealthPanel.instance.UpdateHealth();
 
-        // player hurt coroutine which handles player blinking
-        if (hurtRoutine != null)
-        {
-            StopCoroutine(hurtRoutine);
+            if (health <= 0)
+            {
+                StartCoroutine(RestartTheGameAfterSeconds(1));
+                // reload current scene
+            }
+
+            // player hurt coroutine which handles player blinking
+            if (hurtRoutine != null)
+            {
+                //Knockback(new Vector2(30, 1));
+                StopCoroutine(hurtRoutine);
+            }
+            hurtRoutine = StartCoroutine(HurtRoutine());
         }
-        hurtRoutine = StartCoroutine(HurtRoutine());
     }
 
     public void Knockback (Vector2 force)
     {
+        GetComponent<Rigidbody2D>().AddForce(force);
         //PlayerController.instance.Knockback(force);
-        StartCoroutine(KnockBackRoutine());
+        //StartCoroutine(KnockBackRoutine());
     }
 
-    IEnumerator KnockBackRoutine()
-    {
-        PlayerController.instance.canMove = false;
-        yield return new WaitForSeconds(knockStunTime);
-        PlayerController.instance.canMove = true;
-    }
+    //IEnumerator KnockBackRoutine()
+    //{
+
+    //    PlayerController.instance.canMove = false;
+    //    yield return new WaitForSeconds(knockStunTime);
+    //    PlayerController.instance.canMove = true;
+    //}
 
     IEnumerator HurtRoutine ()
     {
+        hurtable = false;
+        PlayerController.instance.moveable = false;
+        
         float timer = 0;
         bool blink = false;
         while (timer < hurtTimer)
         {
             blink = !blink;
             timer += Time.deltaTime;
+            if (timer < hurtTimer / 2)
+            {
+                // should check if enemy is too the left or to the right in order to decide which way to go
+                if (left)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(-20, 2, 0);
+
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(20, 2, 0);
+
+                }
+            }
+            else
+            {
+                PlayerController.instance.moveable = true;
+            }
             if (blink)
             {
                 foreach (SpriteRenderer sprite in sr)
@@ -83,6 +113,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             sprite.color = Color.white;
         }
+
+        hurtable = true;
     }
     IEnumerator RestartTheGameAfterSeconds(float seconds)
     {

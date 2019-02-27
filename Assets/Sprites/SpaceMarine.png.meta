@@ -20,6 +20,7 @@ TextureImporter:
     21300030: SmallBlast
     21300032: Missle
     21300034: Death
+    21300036: death2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -450,13 +451,33 @@ TextureImporter:
         width: 30
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 68b138e9d6d1f174ca5954efaf49d9e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death2
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 87
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ccda34c5c989c545b63abcaa5b7dd4b
       vertices: []
       indices: 
       edges: []

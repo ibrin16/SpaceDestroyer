@@ -15,7 +15,8 @@ public class EnemyMovement : MonoBehaviour
     private bool dead = false;
     private bool boss = false;
     public float playerKnockBackForce = 20;
-
+    private Vector3 force;
+    private bool knockback;
     //public PlayerInteraction player;
     private Rigidbody2D rgbd;
 
@@ -37,15 +38,17 @@ public class EnemyMovement : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         sr = GetComponentsInChildren<SpriteRenderer>();
+        if (gameObject.CompareTag("BossAlien"))
+        {
+            boss = true;
+        }
+        knockback = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.CompareTag("BossAlien"))
-        {
-            boss = true;
-        }
+        
         //print(boss);
         if (dead && boss)
         {
@@ -53,96 +56,126 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        Vector2 direction = new Vector2(6, 0);
-        Vector2 directionBack = new Vector2(-6, 0);
+        Vector2 direction = new Vector2(10, 0);
+        Vector2 directionBack = new Vector2(-10, 0);
         Vector2 startPosition = transform.position;
         Vector2 offset = new Vector2(0, -0.3f);
         if (gameObject.CompareTag("BossAlien"))
         {
             startPosition += offset;
         }
-        RaycastHit2D hitForward = Physics2D.Raycast(startPosition, direction, direction.magnitude, playerLayerMask);
-        RaycastHit2D hitBack = Physics2D.Raycast(startPosition, directionBack, directionBack.magnitude, playerLayerMask);
-        if (hitForward.collider != null || hitBack.collider != null )
+        if (knockback)
         {
-            move = true;
-        }
 
-        // shoot a ray cast for move
-        if (move)
-        {
-            float deltaX = 0;
-            float deltaY = 0;
-            if(PlayerInteraction.instance.transform.position.x < transform.position.x)
+
+            RaycastHit2D hitForward = Physics2D.Raycast(startPosition, direction, direction.magnitude, playerLayerMask);
+            RaycastHit2D hitBack = Physics2D.Raycast(startPosition, directionBack, directionBack.magnitude, playerLayerMask);
+            if (hitForward.collider != null || hitBack.collider != null)
             {
-                deltaX = -1 * speed;
+                move = true;
             }
-            if (PlayerInteraction.instance.transform.position.x > transform.position.x)
+
+            // shoot a ray cast for move
+            if (move)
             {
-                deltaX = 1 * speed;
+                float deltaX = 0;
+                float deltaY = 0;
+                if (PlayerInteraction.instance.transform.position.x < transform.position.x)
+                {
+                    deltaX = -1 * speed;
+                }
+                if (PlayerInteraction.instance.transform.position.x > transform.position.x)
+                {
+                    deltaX = 1 * speed;
+                }
+                rgbd.velocity = new Vector3(deltaX, deltaY, 0);
             }
-            rgbd.velocity = new Vector3(deltaX, deltaY, 0);
-        }
 
-        // animation
-        if(rgbd.velocity.x < 0)
-        {
-            sp.flipX = false;
-            time += Time.deltaTime;
-
-            if (time >= waitTime)
+            // animation
+            if (rgbd.velocity.x < 0)
             {
-                currentSprite = (currentSprite + 1) % sprites.Length;
-                sp.sprite = sprites[currentSprite];
-                time = 0;
-            }
-        }
-        if (rgbd.velocity.x > 0)
-        {
-            sp.flipX = true;
-            time += Time.deltaTime;
+                sp.flipX = false;
+                time += Time.deltaTime;
 
-            if (time >= waitTime)
+                if (time >= waitTime)
+                {
+                    currentSprite = (currentSprite + 1) % sprites.Length;
+                    sp.sprite = sprites[currentSprite];
+                    time = 0;
+                }
+            }
+            if (rgbd.velocity.x > 0)
             {
-                currentSprite = (currentSprite + 1) % sprites.Length;
-                sp.sprite = sprites[currentSprite];
-                time = 0;
+                sp.flipX = true;
+                time += Time.deltaTime;
+
+                if (time >= waitTime)
+                {
+                    currentSprite = (currentSprite + 1) % sprites.Length;
+                    sp.sprite = sprites[currentSprite];
+                    time = 0;
+                }
             }
         }
-
       
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+      
         Vector2 knockBackDir = collision.transform.position - transform.position;
         knockBackDir.Normalize();
         //look into this more
         if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
             PlayerInteraction.instance.Hit(damage);
-            PlayerInteraction.instance.Knockback(knockBackDir * playerKnockBackForce);
+            if(PlayerInteraction.instance.transform.position.x < transform.position.x)
+            {
+                PlayerInteraction.instance.left = true;
+            }
+            else
+            {
+                PlayerInteraction.instance.left = false;
+            }
+            //PlayerInteraction.instance.Knockback(knockBackDir * playerKnockBackForce);
+        }
+        int dir = 1;
+        if (collision.transform.position.x > transform.position.x)
+        {
+            dir = -1;
+        }
+        else
+        {
+            dir = 1;
         }
         if (collision.CompareTag("Laser"))
         {
             Hit(1);
+            
+            
+                force = new Vector3(30*dir, 1, 0);
+            
             //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
         }
         if (collision.CompareTag("Ball"))
         {
+            force = new Vector3(40*dir, 1, 0);
+
             Hit(2);
             //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
         }
         if (collision.CompareTag("Missle")){
+            force = new Vector3(80*dir, 1, 0);
+
             Hit(5);
-            //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
         }
     }
 
     private void Hit(int hitDamage)
     {
+        move = true;
         health -= hitDamage;
         StartCoroutine(HurtRoutine());
         if (health <= 0)
@@ -152,26 +185,21 @@ public class EnemyMovement : MonoBehaviour
         }
     }   
 
-    // this knock back is not working
-    private void KnockBack(Vector2 force)
-    {
-        rgbd.velocity = force;
-        StartCoroutine(PushBackRoutine());
-    }
 
-    IEnumerator PushBackRoutine()
-    {
-        move = false;
-        yield return new WaitForSeconds(knockStunTime);
-        move = true;
-    }
 
     IEnumerator HurtRoutine()
     {
+        knockback = false;
         float timer = 0;
         bool blink = false;
         while (timer < hurtTimer)
         {
+            if (timer < hurtTimer / 2)
+            {
+                rgbd.velocity = force;
+
+            }
+            knockback = true;
             blink = !blink;
             timer += Time.deltaTime;
             if (blink)
