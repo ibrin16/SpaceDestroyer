@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7743460277398839091}
   - component: {fileID: 7743460277398839090}
   - component: {fileID: 7743460277398839094}
-  - component: {fileID: 7743460277398839089}
   - component: {fileID: 7743460277398839088}
+  - component: {fileID: 3607471779951275918}
   m_Layer: 0
   m_Name: SpaceHugger
   m_TagString: SpaceHugger
@@ -109,43 +109,6 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 9062d5f1237fc4242aa246bc147506db, type: 3}
   waitTime: 0.1
   sr: []
---- !u!60 &7743460277398839089
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7743460277398839101}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6, y: 0.19}
-    newSize: {x: 0.6, y: 0.19}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.12, y: 0.065}
-      - {x: 0.06437811, y: 0.029460363}
-      - {x: -0.049999997, y: 0.095}
-      - {x: -0.29, y: 0.095}
-      - {x: -0.29999998, y: 0.085}
-      - {x: -0.29999998, y: -0.095}
-      - {x: -0.11510575, y: -0.09898627}
-      - {x: -0.04910451, y: -0.018618338}
-      - {x: 0.099999994, y: -0.060672913}
-      - {x: 0.1847189, y: -0.03747017}
-      - {x: 0.29999998, y: -0.074999996}
-      - {x: 0.29999998, y: 0.044999998}
 --- !u!50 &7743460277398839088
 Rigidbody2D:
   serializedVersion: 4
@@ -167,3 +130,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &3607471779951275918
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743460277398839101}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.000000004357851, y: 0.027417231}
+  m_Size: {x: 0.60000014, y: 0.13516574}
+  m_Direction: 1

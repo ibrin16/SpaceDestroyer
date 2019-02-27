@@ -7,8 +7,8 @@ public class Gun : MonoBehaviour
     // need to know ammo, fire rate, mag size, mag increase size
     // and how to fire
     public static Gun instance;
-    public int ammo;
-    public int clipAmmo;
+    //public int ammo;
+    //public int clipAmmo;
     public float fireRate;
     public int magSize;
     public int magIncrease;
@@ -63,10 +63,8 @@ public class Gun : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SwitchGuns(0);
-                equipedGun = 0;
+                equipedGun = 0;               
                 UIHealthPanel.instance.UpdateAmmo();
-
-
             }
             // equip the shotgun
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -74,14 +72,12 @@ public class Gun : MonoBehaviour
                 SwitchGuns(1);
                 equipedGun = 1;
                 UIHealthPanel.instance.UpdateAmmo();
-
-
-
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 SwitchGuns(2);
                 equipedGun = 2;
+             
                 UIHealthPanel.instance.UpdateAmmo();
 
 
@@ -89,8 +85,6 @@ public class Gun : MonoBehaviour
 
         }
        
-
-
     }
 
     public void SwitchGuns(int index)
@@ -101,6 +95,8 @@ public class Gun : MonoBehaviour
             sp.sprite = difGuns[0];
             // and change the fire type
             fireType = 0;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[0];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
             auto = false;
         }
         if (myGuns[index] == 1)
@@ -109,6 +105,8 @@ public class Gun : MonoBehaviour
             sp.sprite = difGuns[1];
             // and change the fire type
             fireType = 1;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[1];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[1];
             auto = false;
 
         }
@@ -118,6 +116,8 @@ public class Gun : MonoBehaviour
             sp.sprite = difGuns[2];
             // and change the fire type
             fireType = 2;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[2];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[2];
             auto = true;
         }
         if (myGuns[index] == 3)
@@ -126,6 +126,8 @@ public class Gun : MonoBehaviour
             sp.sprite = difGuns[3];
             // and change the fire type
             fireType = 3;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[3];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[3];
             auto = true;
         }
         if (myGuns[index] == 4)
@@ -134,6 +136,8 @@ public class Gun : MonoBehaviour
             sp.sprite = difGuns[4];
             // and change the fire type
             fireType = 4;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[4];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[4];
             auto = false;
         }
         

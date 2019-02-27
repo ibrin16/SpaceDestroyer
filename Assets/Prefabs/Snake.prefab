@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3515616214800148}
   - component: {fileID: 3515616214800149}
   - component: {fileID: 3515616214800151}
-  - component: {fileID: 3515616214800145}
   - component: {fileID: 3515616214800150}
+  - component: {fileID: 1565150163244125818}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Snake
@@ -109,41 +109,6 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 01bbe547fd02ba440b79623a5978f2c9, type: 3}
   waitTime: 0.1
   sr: []
---- !u!60 &3515616214800145
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515616214800154}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5666667, y: 0.7}
-    newSize: {x: 0.47, y: 0.21}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.3998359, y: 0.3381458}
-      - {x: -0.78333336, y: 0.35000002}
-      - {x: -0.75572, y: 0.107806206}
-      - {x: -0.5995214, y: -0.087031364}
-      - {x: -0.5166667, y: -0.35000002}
-      - {x: 0.78333336, y: -0.35000002}
-      - {x: 0.73589814, y: -0.062613994}
-      - {x: 0.6894547, y: 0.26406285}
-      - {x: 0.3571018, y: 0.4148397}
-      - {x: 0.048002366, y: 0.0352687}
 --- !u!50 &3515616214800150
 Rigidbody2D:
   serializedVersion: 4
@@ -165,3 +130,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1565150163244125818
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515616214800154}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.09545907, y: 0.09832164}
+  m_Size: {x: 1.7575852, y: 0.73194784}
+  m_Direction: 1

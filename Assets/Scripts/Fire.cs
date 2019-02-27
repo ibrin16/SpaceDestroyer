@@ -35,16 +35,15 @@ public class Fire : MonoBehaviour
     void Awake()
     {
         instance = this;
+
         for (int i = 0; i < startAmmo.Length; i++)
         {
             currentAmmo[i] = startAmmo[i];
-            //print(currentAmmo[i]);
         }
     }
 
     private void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -58,15 +57,49 @@ public class Fire : MonoBehaviour
         {
             fireSide = -.75f;
         }
-        //if (blast != null)
-        //{
-        //    timer2 += Time.deltaTime;
-        //    if (timer2 >= destroyTime)
-        //    {
-        //        Destroy(blast);
-        //        print("here");
-        //    }
-        //}
+        switch (Gun.instance.fireType)
+        {
+            case 0:
+                current = ballPrefab;
+                explosion = false;
+                fireRate = rates[0];
+                ammoIndex = 0;
+                
+                break;
+
+            case 1:
+                current = ballPrefab;
+                explosion = false;
+                fireRate = rates[1];
+                ammoIndex = 1;
+
+                break;
+
+            case 2:
+                current = laserPrefab;
+                explosion = false;
+                fireRate = rates[2];
+                ammoIndex = 2;
+
+                break;
+
+            case 3:
+                current = laserPrefab;
+                explosion = false;
+                fireRate = rates[3];
+                ammoIndex = 3;
+
+                break;
+
+            case 4:
+                current = misslePrefab;
+                explosion = true;
+                fireRate = rates[4];
+                ammoIndex = 4;
+
+                break;
+        }
+
     }
 
 
@@ -76,47 +109,7 @@ public class Fire : MonoBehaviour
         if (Gun.instance.equiped)
         {
             // need to check what the gun type is and then change the prefab that is shot accordingly
-            switch (Gun.instance.fireType)
-            {
-                case 0:
-                    current = ballPrefab;
-                    explosion = false;
-                    fireRate = rates[0];
-                    ammoIndex = 0;
-                    break;
-
-                case 1:
-                    current = ballPrefab;
-                    explosion = false;
-                    fireRate = rates[1];
-                    ammoIndex = 1;
-
-                    break;
-
-                case 2:
-                    current = laserPrefab;
-                    explosion = false;
-                    fireRate = rates[2];
-                    ammoIndex = 2;
-
-                    break;
-
-                case 3:
-                    current = laserPrefab;
-                    explosion = false;
-                    fireRate = rates[3];
-                    ammoIndex = 3;
-
-                    break;
-
-                case 4:
-                    current = misslePrefab;
-                    explosion = true;
-                    fireRate = rates[4];
-                    ammoIndex = 4;
-
-                    break;
-            }
+            
             if (Gun.instance.auto && currentAmmo[ammoIndex] > 0) 
             {
                 Autofire();
@@ -140,7 +133,8 @@ public class Fire : MonoBehaviour
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
-       // print(currentAmmo[ammoIndex]);
+        // print(currentAmmo[ammoIndex]);
+        UIHealthPanel.instance.ammo --;
         UIHealthPanel.instance.UpdateAmmo();
         blast = Instantiate(smallBlast, start, Quaternion.identity);
         blast.transform.SetParent(this.transform);
@@ -159,6 +153,8 @@ public class Fire : MonoBehaviour
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
         //print(currentAmmo[ammoIndex]);
+        UIHealthPanel.instance.ammo--;
+
         UIHealthPanel.instance.UpdateAmmo();
         GameObject changeBlast;
         if (fireRate == rates[1])

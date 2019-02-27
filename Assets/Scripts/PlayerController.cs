@@ -248,6 +248,10 @@ public class PlayerController : MonoBehaviour
                 gunsOn[0] = true;
                 Destroy(collision.gameObject);
                 Gun.instance.myGuns[0] = 0;
+                if (AlreadyEquiped("Pistol"))
+                {
+                    Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
+                }
 
             }
             else
@@ -259,6 +263,8 @@ public class PlayerController : MonoBehaviour
 
                 Gun.instance.equiped = true;
                 Gun.instance.myGuns[SlotFinder()] = 0;
+                UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[0];
+                UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
                 UIHealthPanel.instance.UpdateAmmo();
 
             }
@@ -331,6 +337,21 @@ public class PlayerController : MonoBehaviour
                 groundCheckStart += Vector2.right * (1.0f / (groundCheckRayCount - 1.0f)) * groundCheckWidth;
             }
         }
+    }
+
+    private bool AlreadyEquiped(string tag)
+    {
+        int[] myGuns = Gun.instance.myGuns;
+        for (int i = 0; i < myGuns.Length; i++)
+        {
+            // if it is a pistol and the gun just grabbed has pistol tag
+            if (myGuns[i] == 0 && tag.Equals("Pistol"))
+            {
+                print("here");  
+                return true;
+            }
+        }
+        return false;
     }
 
 }
