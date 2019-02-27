@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6079983098551508632
+--- !u!1 &4951943327717294621
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4449343906760723728}
-  - component: {fileID: 8156400018021315706}
-  - component: {fileID: 6676774864945139925}
+  - component: {fileID: 273962915686254308}
+  - component: {fileID: 9013679952595458044}
+  - component: {fileID: 7266947616652227331}
   m_Layer: 5
-  m_Name: Text5
+  m_Name: Text6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4449343906760723728
+--- !u!224 &273962915686254308
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6079983098551508632}
+  m_GameObject: {fileID: 4951943327717294621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,24 +34,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.9, y: 127.7}
-  m_SizeDelta: {x: 577.9, y: 92.2}
+  m_AnchoredPosition: {x: -3, y: 132}
+  m_SizeDelta: {x: 439.2, y: 97.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8156400018021315706
+--- !u!222 &9013679952595458044
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6079983098551508632}
+  m_GameObject: {fileID: 4951943327717294621}
   m_CullTransparentMesh: 0
---- !u!114 &6676774864945139925
+--- !u!114 &7266947616652227331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6079983098551508632}
+  m_GameObject: {fileID: 4951943327717294621}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -78,7 +78,5 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Surprised to see me? Don''t worry I''m just a hologram there''s no way
-    I''m going down there.
-
-'
+  m_Text: You also have space to pick more guns. Press 1,2, or 3 to switch. Make sure
+    to keep an eye on your ammo!
