@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject UIPanel = null;
     bool open;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class PauseMenu : MonoBehaviour
     {
         open = true;
         UIPanel.SetActive(true);
+        Time.timeScale = 0;
         UIPanel.transform.localScale = new Vector3(1, 1, 1);
         yield return null;
     }
@@ -44,12 +46,14 @@ public class PauseMenu : MonoBehaviour
     {
         UIPanel.transform.localScale = new Vector3(0, 1, 1);
         open = false;
+        Time.timeScale = 1;
         UIPanel.SetActive(false);
         yield return null;
     }
 
     public void LoadScene (string scene)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene);
     }
 

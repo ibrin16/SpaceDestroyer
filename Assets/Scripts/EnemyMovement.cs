@@ -106,26 +106,27 @@ public class EnemyMovement : MonoBehaviour
         }
         if (collision.CompareTag("Laser"))
         {
-            Hit(1,1);
+            Hit(1);
             Destroy(collision.gameObject);
         }
         if (collision.CompareTag("Ball"))
         {
-            Hit(2,2);
+            Hit(2);
             Destroy(collision.gameObject);
 
         }
         if (collision.CompareTag("RPG")){
-            Hit(5,5);
+            Hit(5);
             Destroy(collision.gameObject);
 
         }
     }
-    private void Hit(int damage, int knockback)
+    private void Hit(int damage)
     {
-        KnockBack(knockback);
+        //KnockBack(knockback);
         health -= damage;
-        if(health <= 0)
+        StartCoroutine(HurtRoutine());
+        if (health <= 0)
         {
             Destroy(gameObject);
             //print("enemy death");
