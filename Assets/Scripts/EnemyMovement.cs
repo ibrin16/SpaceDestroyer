@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     public float hurtTimer = 0.1f;
     private float knockStunTime = 1f;
     private bool dead = false;
+    private bool boss = false;
     public float knockBackForce = 20;
 
     //public PlayerInteraction player;
@@ -41,12 +42,28 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 direction = new Vector2(10, 0);
-        Vector2 directionBack = new Vector2(-10, 0);
-        RaycastHit2D hitForward = Physics2D.Raycast(transform.position, direction, direction.magnitude, playerLayerMask);
-        RaycastHit2D hitBack = Physics2D.Raycast(transform.position, directionBack, directionBack.magnitude, playerLayerMask);
+        if (gameObject.CompareTag("BossAlien"))
+        {
+            boss = true;
+        }
+        print(boss);
+        if (dead && boss)
+        {
+            SceneManager.LoadScene("EndGame");
 
-        if (hitForward.collider != null || hitBack.collider != null)
+        }
+
+        Vector2 direction = new Vector2(6, 0);
+        Vector2 directionBack = new Vector2(-6, 0);
+        Vector2 startPosition = transform.position;
+        Vector2 offset = new Vector2(0, -0.3f);
+        if (gameObject.CompareTag("BossAlien"))
+        {
+            startPosition += offset;
+        }
+        RaycastHit2D hitForward = Physics2D.Raycast(startPosition, direction, direction.magnitude, playerLayerMask);
+        RaycastHit2D hitBack = Physics2D.Raycast(startPosition, directionBack, directionBack.magnitude, playerLayerMask);
+        if (hitForward.collider != null || hitBack.collider != null )
         {
             move = true;
         }
@@ -93,15 +110,9 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (dead && this.CompareTag("BossAlien"))
-        {
-            SceneManager.LoadScene("EndGame");
-
-        }
+      
     }
     private void OnTriggerEnter2D(Collider2D collision)
-        // maybe should shoot a ray cast to hit the player instead
-        // may work better
     {
         Vector2 knockBackDir = collision.transform.position - transform.position;
         knockBackDir.Normalize();
@@ -113,32 +124,30 @@ public class EnemyMovement : MonoBehaviour
         if (collision.CompareTag("Laser"))
         {
             Hit(1);
+            //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
-            KnockBack(knockBackDir * knockBackForce);
         }
         if (collision.CompareTag("Ball"))
         {
             Hit(2);
+            //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
-            KnockBack(knockBackDir * knockBackForce);
         }
         if (collision.CompareTag("RPG")){
             Hit(5);
+            //KnockBack(-knockBackDir * knockBackForce);
             Destroy(collision.gameObject);
-            KnockBack(knockBackDir * knockBackForce);
         }
     }
 
     private void Hit(int hitDamage)
     {
-        //KnockBack(knockback);
         health -= hitDamage;
         StartCoroutine(HurtRoutine());
         if (health <= 0)
         {
             dead = true;
             Destroy(gameObject);
-            //print("enemy death");
         }
     }   
 
@@ -185,6 +194,5 @@ public class EnemyMovement : MonoBehaviour
             sprite.color = Color.white;
         }
     }
-
 
 }

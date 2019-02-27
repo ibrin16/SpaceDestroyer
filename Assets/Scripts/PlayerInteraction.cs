@@ -73,7 +73,7 @@ public class PlayerInteraction : MonoBehaviour
     IEnumerator RestartTheGameAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Tutorial");
     }
 
 
