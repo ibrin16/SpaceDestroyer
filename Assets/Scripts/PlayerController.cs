@@ -76,8 +76,11 @@ public class PlayerController : MonoBehaviour
         {
 
             UpdateGrounding();
-            //print(grounded);
-
+            if (!grounded)
+            {
+                sp.sprite = sprites[3];
+            }
+                
             Vector2 vel = rgbd.velocity;
             vel.x = 0;
             //vel.y = 0;
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour
                     Fire.instance.fireSide = -.75f;
                 }
                 switchTime += Time.deltaTime;
-                if (switchTime >= animationTime)
+                if (switchTime >= animationTime && grounded)
                 {
                     currentSprite = (currentSprite + 1) % sprites.Length;
                     sp.sprite = sprites[currentSprite];
@@ -116,7 +119,7 @@ public class PlayerController : MonoBehaviour
                     Fire.instance.fireSide = .75f;
                 }
                 switchTime += Time.deltaTime;
-                if (switchTime >= animationTime)
+                if (switchTime >= animationTime && grounded)
                 {
                     currentSprite = (currentSprite + 1) % sprites.Length;
                     sp.sprite = sprites[currentSprite];
@@ -133,6 +136,10 @@ public class PlayerController : MonoBehaviour
             }
             vel.y += -gravity * Time.deltaTime;
             rgbd.velocity = vel;
+            if(vel.x == 0 && grounded)
+            {
+                sp.sprite = sprites[1];
+            }
 
             if (Gun.instance.auto)
             {
@@ -174,6 +181,7 @@ public class PlayerController : MonoBehaviour
             // want to just change the position of the sprite now the whole thing
             Vector3 newPos = new Vector3(transform.position.x, transform.position.y, 0);
             sp.transform.position = newPos;
+       
         }
     }
 
