@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
     // need to know who can jump and who cant
     // need to only go towards enemy if inside the collider
-    private bool move;
+    private bool move = false;
     public bool jump;
     public float speed;
     public float hurtTimer = 0.1f;
-
+    private float knockStunTime = 1f;
+    private bool dead = false;
+    public float knockBackForce = 20;
 
     //public PlayerInteraction player;
     private Rigidbody2D rgbd;
@@ -25,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
 
     private SpriteRenderer sp;
     public SpriteRenderer[] sr;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,6 @@ public class EnemyMovement : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         sr = GetComponentsInChildren<SpriteRenderer>();
-
     }
 
     // Update is called once per frame
@@ -90,11 +92,19 @@ public class EnemyMovement : MonoBehaviour
                 time = 0;
             }
         }
+
+        if (dead && this.CompareTag("BossAlien"))
+        {
+            SceneManager.LoadScene("EndGame");
+
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
         // maybe should shoot a ray cast to hit the player instead
         // may work better
     {
+        Vector2 knockBackDir = collision.transform.position - transform.position;
+        knockBackDir.Normalize();
         //look into this more
         if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
         {
@@ -104,19 +114,21 @@ public class EnemyMovement : MonoBehaviour
         {
             Hit(1);
             Destroy(collision.gameObject);
+            KnockBack(knockBackDir * knockBackForce);
         }
         if (collision.CompareTag("Ball"))
         {
             Hit(2);
             Destroy(collision.gameObject);
-
+            KnockBack(knockBackDir * knockBackForce);
         }
         if (collision.CompareTag("RPG")){
             Hit(5);
             Destroy(collision.gameObject);
-
+            KnockBack(knockBackDir * knockBackForce);
         }
     }
+
     private void Hit(int hitDamage)
     {
         //KnockBack(knockback);
@@ -124,16 +136,24 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(HurtRoutine());
         if (health <= 0)
         {
+            dead = true;
             Destroy(gameObject);
             //print("enemy death");
         }
     }   
 
     // this knock back is not working
-    private void KnockBack(int distance)
+    private void KnockBack(Vector2 force)
     {
-        rgbd.velocity = new Vector3(-distance, 0, 0) * speed * 3;
-        StartCoroutine(HurtRoutine());
+        rgbd.velocity = force;
+        StartCoroutine(PushBackRoutine());
+    }
+
+    IEnumerator PushBackRoutine()
+    {
+        move = false;
+        yield return new WaitForSeconds(knockStunTime);
+        move = true;
     }
 
     IEnumerator HurtRoutine()
