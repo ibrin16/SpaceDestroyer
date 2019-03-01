@@ -118,6 +118,7 @@ MonoBehaviour:
   jump: 0
   speed: 7
   hurtTimer: 0.1
+  boss: 1
   playerKnockBackForce: 20
   health: 20
   damage: 20

@@ -45,7 +45,8 @@ public class Projectile : MonoBehaviour
     {
         if (Fire.instance.explosion)
         {
-            if (collision.CompareTag("Wall") || collision.CompareTag("Snake"))
+            if (collision.CompareTag("Wall") || collision.CompareTag("Snake") || collision.CompareTag("SpaceHugger")
+                || collision.CompareTag("BossAlien") || collision.CompareTag("GroundEgg"))
             {
                 GameObject expl = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);

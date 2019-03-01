@@ -11,9 +11,8 @@ public class EnemyMovement : MonoBehaviour
     public bool jump;
     public float speed;
     public float hurtTimer = 0.1f;
-    private float knockStunTime = 1f;
-    private bool dead = false;
-    private bool boss = false;
+    public bool boss;
+    private bool dead;
     public float playerKnockBackForce = 20;
     private Vector3 force;
     private bool knockback;
@@ -30,6 +29,7 @@ public class EnemyMovement : MonoBehaviour
 
     private SpriteRenderer sp;
     public SpriteRenderer[] sr;
+
     
 
     // Start is called before the first frame update
@@ -38,10 +38,6 @@ public class EnemyMovement : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         sr = GetComponentsInChildren<SpriteRenderer>();
-        if (gameObject.CompareTag("BossAlien"))
-        {
-            boss = true;
-        }
         knockback = true;
     }
 
@@ -50,11 +46,11 @@ public class EnemyMovement : MonoBehaviour
     {
         
         //print(boss);
-        if (dead && boss)
-        {
-            SceneManager.LoadScene("EndGame");
+        //if (dead && boss)
+        //{
+        //    SceneManager.LoadScene("Win");
 
-        }
+        //}
 
         Vector2 direction = new Vector2(10, 0);
         Vector2 directionBack = new Vector2(-10, 0);
@@ -64,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
         {
             startPosition += offset;
         }
-        if (knockback)
+        if (knockback && !dead)
         {
 
 
@@ -181,8 +177,17 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(HurtRoutine());
         if (health <= 0)
         {
-            dead = true;
-            Destroy(gameObject);
+            if (boss)
+            {
+                StartCoroutine(EndGame(3f));
+                sp.sprite = null;
+                dead = true;
+                Destroy(sp.GetComponent<CapsuleCollider2D>());
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }   
 
@@ -223,6 +228,12 @@ public class EnemyMovement : MonoBehaviour
         {
             sprite.color = Color.white;
         }
+    }
+
+    IEnumerator EndGame(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene("Win");
     }
 
 }
