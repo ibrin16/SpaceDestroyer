@@ -119,7 +119,7 @@ public class PlayerInteraction : MonoBehaviour
     IEnumerator RestartTheGameAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Lose");
     }
 
 
