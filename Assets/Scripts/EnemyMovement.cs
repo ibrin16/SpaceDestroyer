@@ -29,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
 
     private SpriteRenderer sp;
     public SpriteRenderer[] sr;
+    private AudioSource audioHits;
+    public AudioClip[] sounds;
 
     
 
@@ -39,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         sr = GetComponentsInChildren<SpriteRenderer>();
         knockback = true;
+        audioHits = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -174,9 +177,11 @@ public class EnemyMovement : MonoBehaviour
     {
         move = true;
         health -= hitDamage;
+        audioHits.PlayOneShot(sounds[0]);
         StartCoroutine(HurtRoutine());
         if (health <= 0)
         {
+            audioHits.PlayOneShot(sounds[1]);
             if (boss)
             {
                 StartCoroutine(EndGame(3f));
