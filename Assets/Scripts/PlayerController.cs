@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public Gun equipedActualGun;
     public GameObject equipedGun;
     private float timer = 0;
+    public bool reload;
 
 
 
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
         gunsOn = false;
         moveable = true;
         jumpSound = GetComponent<AudioSource>();
+        reload = false;
     }
 
     // Update is called once per frame
@@ -263,7 +265,7 @@ public class PlayerController : MonoBehaviour
         {
             //if (gunsOn)
             //{
-            print("here");
+
             //gunsOn[0] = true;
             Destroy(collision.gameObject);
             Gun.instance.myGuns[0] = 0;
@@ -271,14 +273,15 @@ public class PlayerController : MonoBehaviour
             if (AlreadyEquiped("Pistol"))
             {
                 Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
-                UIHealthPanel.instance.UpdateAmmo();
+                UIHealthPanel.instance.ammo = Fire.instance.startAmmo[0];
+                reload = true;
             }
         }
 
             //}
             if (collision.CompareTag("Gun")) 
             {
-                print("here");
+
                 gunsOn = true;
                 equipedGun = collision.gameObject;
                 equipedGun.transform.SetParent(transform);
@@ -303,6 +306,8 @@ public class PlayerController : MonoBehaviour
             {
                 Fire.instance.currentAmmo[1] = Fire.instance.startAmmo[1];
                 UIHealthPanel.instance.UpdateAmmo();
+                reload = true;
+
 
             }
         }
@@ -316,6 +321,8 @@ public class PlayerController : MonoBehaviour
             {
                 Fire.instance.currentAmmo[2] = Fire.instance.startAmmo[2];
                 UIHealthPanel.instance.UpdateAmmo();
+                reload = true;
+
 
             }
         }
@@ -330,6 +337,8 @@ public class PlayerController : MonoBehaviour
             {
                 Fire.instance.currentAmmo[3] = Fire.instance.startAmmo[3];
                 UIHealthPanel.instance.UpdateAmmo();
+                reload = true;
+
 
             }
         }
@@ -344,6 +353,8 @@ public class PlayerController : MonoBehaviour
             {
                 Fire.instance.currentAmmo[4] = Fire.instance.startAmmo[4];
                 UIHealthPanel.instance.UpdateAmmo();
+                reload = true;
+
 
             }
         }
@@ -382,11 +393,11 @@ public class PlayerController : MonoBehaviour
             //Gun.instance.equipedGun = currentGun;
             Gun.instance.fireType = currentGun;
             Gun.instance.sp.sprite = Gun.instance.difGuns[currentGun];
-            print(currentGun);
-            foreach (int i in Gun.instance.myGuns)
-            {
-                print(i);
-            }
+            //print(currentGun);
+            //foreach (int i in Gun.instance.myGuns)
+            //{
+            //    print(i);
+            //}
             return Gun.instance.equipedGun;
         }
     }
@@ -417,7 +428,7 @@ public class PlayerController : MonoBehaviour
             // if it is a pistol and the gun just grabbed has pistol tag
             if (myGuns[i] == 0 && tag.Equals("Pistol"))
             {
-                print("here");
+
                 return true;
             }
             if (myGuns[i] == 1 && tag.Equals("Shotgun"))

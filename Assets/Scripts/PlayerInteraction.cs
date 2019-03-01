@@ -9,7 +9,6 @@ public class PlayerInteraction : MonoBehaviour
     public static PlayerInteraction instance;
     //public GameObject equipedGun;
     public float hurtTimer = 0.1f;
-    float knockStunTime = 0.5f;
     public SpriteRenderer[] sr;
     Coroutine hurtRoutine;
     public Sprite death;

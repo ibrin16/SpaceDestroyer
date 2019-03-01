@@ -75,18 +75,19 @@ public class Gun : MonoBehaviour
                 SwitchGuns(1);
                 equipedGun = 1;
                 UIHealthPanel.instance.UpdateAmmo();
-                last = 2;
                 PlayerController.instance.key2 = false;
+                last = 2;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3) || PlayerController.instance.key3)
-            {
-                SwitchGuns(2);
-                equipedGun = 2;
-                UIHealthPanel.instance.UpdateAmmo();
-                last = 3;
-                PlayerController.instance.key3 = false;
+            // only going to have 2 guns in order to implement this
+            //if (Input.GetKeyDown(KeyCode.Alpha3) || PlayerController.instance.key3)
+            //{
+            //    SwitchGuns(2);
+            //    equipedGun = 2;
+            //    UIHealthPanel.instance.UpdateAmmo();
+            //    last = 3;
+            //    PlayerController.instance.key3 = false;
 
-            }
+            //}
 
         }
        
