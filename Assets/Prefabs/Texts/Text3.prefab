@@ -78,5 +78,5 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Great now pick up that pistol it's almost time to deploy. Try killing that
-    alien. Press 'space' to shoot.
+  m_Text: Now pick up that pistol it's almost time to deploy. Try killing that alien.
+    Press 'space' to shoot.
