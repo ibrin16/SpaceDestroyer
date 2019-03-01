@@ -79,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
             if (move)
             {
                 float deltaX = 0;
-                float deltaY = 0;
+                float deltaY = -3;
                 if (PlayerInteraction.instance.transform.position.x < transform.position.x)
                 {
                     deltaX = -1 * speed;
@@ -89,6 +89,7 @@ public class EnemyMovement : MonoBehaviour
                     deltaX = 1 * speed;
                 }
                 rgbd.velocity = new Vector3(deltaX, deltaY, 0);
+               
             }
 
             // animation
