@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7743460277398839094}
   - component: {fileID: 7743460277398839088}
   - component: {fileID: 3607471779951275918}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpaceHugger
   m_TagString: SpaceHugger
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   jump: 0
   speed: 4
   hurtTimer: 0.1
+  boss: 0
   playerKnockBackForce: 20
   health: 5
   damage: 15
@@ -126,7 +127,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f6b46c3d953514e899decb08010cd78a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

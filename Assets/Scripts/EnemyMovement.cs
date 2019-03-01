@@ -75,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
             if (move)
             {
                 float deltaX = 0;
-                float deltaY = -3;
+                float deltaY = -13;
                 if (PlayerInteraction.instance.transform.position.x < transform.position.x)
                 {
                     deltaX = -1 * speed;

@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour
 
     public bool first;
     public bool second;
-    public bool third;
+    //public bool third;
 
     public Sprite[] difGuns;
     public int fireType; //0 is pistol 1 is shotgun
@@ -44,7 +44,10 @@ public class Gun : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         equiped = false;
-        myGuns = new int[3];
+        myGuns = new int[2];
+        equipedGun = 0;
+        first = true;
+        second = false;
     }
 
     // Update is called once per frame
@@ -78,6 +81,7 @@ public class Gun : MonoBehaviour
                 PlayerController.instance.key2 = false;
                 last = 2;
             }
+
             // only going to have 2 guns in order to implement this
             //if (Input.GetKeyDown(KeyCode.Alpha3) || PlayerController.instance.key3)
             //{
@@ -93,14 +97,22 @@ public class Gun : MonoBehaviour
        
     }
 
+    // takes the index to switch the gun into
     public void SwitchGuns(int index)
     {
+        if(index == 1)
+        {
+            second = true;
+        }
+        // if the gun at that index is 0
         if (myGuns[index] == 0)
         {
-            // change the sprite of the gun
+            // change the sprite to the pistol
             sp.sprite = difGuns[0];
             // and change the fire type
             fireType = 0;
+            // then update the panel to ammo / max ammo
+            // this always works
             UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[0];
             UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
             auto = false;

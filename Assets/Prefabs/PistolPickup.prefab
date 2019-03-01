@@ -158,7 +158,6 @@ MonoBehaviour:
   auto: 0
   first: 0
   second: 0
-  third: 0
   difGuns:
   - {fileID: 21300014, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
   - {fileID: 21300016, guid: 63d03e64a8277d24a850dd82f6dc9833, type: 3}
@@ -279,6 +278,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.95, y: 0.6}
+  m_Offset: {x: -0.07255668, y: 0.022161346}
+  m_Size: {x: 0.80488807, y: 0.4106239}
   m_Direction: 1

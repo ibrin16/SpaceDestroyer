@@ -27,11 +27,7 @@ public class UIHealthPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.instance.reload)
-        {
-            UpdateAmmo();
-            PlayerController.instance.reload = false;
-        }
+        
     }
 
     public void UpdateHealth()

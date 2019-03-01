@@ -32,11 +32,10 @@ public class TutorialGuide : MonoBehaviour
             {
                 back = Instantiate(background, spawn, Quaternion.identity);
                 back.transform.SetParent(GameUICanvas.instance.transform);
-                back.transform.position += new Vector3(325, 300, 0);
+                back.transform.position += new Vector3(325, -10, 0);
                 text = Instantiate(textPrefab[number], spawn, Quaternion.identity);
                 text.transform.SetParent(GameUICanvas.instance.transform);
-                text.transform.position += new Vector3(325, 300,0);
-               
+                text.transform.position += new Vector3(325, 0,0);
                 textSeen = true;
             }
             

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public Gun equipedActualGun;
     public GameObject equipedGun;
     private float timer = 0;
-    public bool reload;
+    //public bool reload;
 
 
 
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     public bool key1;
     public bool key2;
-    public bool key3;
+    //public bool key3;
 
     bool grounded = false;
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         gunsOn = false;
         moveable = true;
         jumpSound = GetComponent<AudioSource>();
-        reload = false;
+        //reload = false;
     }
 
     // Update is called once per frame
@@ -251,153 +251,241 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        // need to check if gun 0 is equipped
-        // then check if gun 1 is equipped
-        // then check if gun 2 is equipped
+        // if fall thru the hole start the level
         if (collision.CompareTag("Finish"))
         {
             SceneManager.LoadScene("Level1");
 
         }
-        // maybe keep track of the last pressed number and then automatically press it again
-        if (collision.CompareTag("Pistol"))
-        {
-            //if (gunsOn)
-            //{
 
-            //gunsOn[0] = true;
-            Destroy(collision.gameObject);
+        // the original gun
+        if (collision.CompareTag("Gun"))
+        {
+            Gun.instance.first = true;
+            gunsOn = true;
+            equipedGun = collision.gameObject;
+            equipedGun.transform.SetParent(transform);
+            equipedGun.transform.position = transform.position + Vector3.right * 0.5f;
+
+            Gun.instance.equiped = true;
             Gun.instance.myGuns[0] = 0;
-            currentGun = 0;
+            UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[0];
+            UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
+            UIHealthPanel.instance.UpdateAmmo();
+
+        }
+
+        // maybe keep track of the last pressed number and then automatically press it again
+        // so check the tag of the gun
+        if (collision.CompareTag("Pistol"))
+        { 
+            // destroy the hun
+            Destroy(collision.gameObject);
+            
             if (AlreadyEquiped("Pistol"))
             {
                 Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
-                UIHealthPanel.instance.ammo = Fire.instance.startAmmo[0];
-                reload = true;
+                // the problem with this line is if the gun you just picked up isnt the one equipped it still changes the ammo
+                // if the gun equipped is the pistol
+                if(Gun.instance.fireType == 0)
+                {
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[0];
+                }
             }
-        }
-
-            //}
-            if (collision.CompareTag("Gun")) 
+            else
             {
+                // myGuns knows that this gun is equipped
+                Gun.instance.myGuns[0] = 0;
+                
 
-                gunsOn = true;
-                equipedGun = collision.gameObject;
-                equipedGun.transform.SetParent(transform);
-                equipedGun.transform.position = transform.position + Vector3.right * 0.5f;
-
-                Gun.instance.equiped = true;
-                Gun.instance.myGuns[SlotFinder()] = 0;
-                UIHealthPanel.instance.ammo = Fire.instance.currentAmmo[0];
-                UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
-                UIHealthPanel.instance.UpdateAmmo();
-
+                // also need to switch guns
+                if (switchGun)
+                {
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[0];
+                    Gun.instance.fireType = 0;
+                    Gun.instance.auto = false;
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[0];
+                    Fire.instance.fireRate = Fire.instance.rates[0];
+                    Fire.instance.ammoIndex = 0;
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[0];
+                    UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[0];
+                    UIHealthPanel.instance.name = "Pistol: ";
+                }
             }
+            UIHealthPanel.instance.UpdateAmmo();
 
-        
+        }
         if (collision.CompareTag("Shotgun"))
         {
             //gunsOn[1] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[SlotFinder()] = 1;
-            currentGun = 1;
+            
             if (AlreadyEquiped("Shotgun"))
             {
                 Fire.instance.currentAmmo[1] = Fire.instance.startAmmo[1];
-                UIHealthPanel.instance.UpdateAmmo();
-                reload = true;
-
-
+                if (Gun.instance.fireType == 1)
+                {
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[1];
+                }
             }
+            else
+            {
+                Gun.instance.myGuns[SlotFinder()] = 1;
+                
+
+
+                if (switchGun)
+                {
+                    currentGun = 1;
+                    Gun.instance.fireType = 1;
+                    Gun.instance.auto = false;
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[1];
+                    Fire.instance.fireRate = Fire.instance.rates[1];
+                    Fire.instance.ammoIndex = 1;
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[1];
+                    UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[1];
+                    UIHealthPanel.instance.name = "Shotgun: ";
+
+                }
+            }
+            UIHealthPanel.instance.UpdateAmmo();
+
         }
         if (collision.CompareTag("AR"))
         {
             //gunsOn[2] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[SlotFinder()] = 2;
-            currentGun = 2;
+            
             if (AlreadyEquiped("AR"))
             {
                 Fire.instance.currentAmmo[2] = Fire.instance.startAmmo[2];
-                UIHealthPanel.instance.UpdateAmmo();
-                reload = true;
-
-
+                if (Gun.instance.fireType == 2)
+                {
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[2];
+                }
             }
+            else
+            {
+                Gun.instance.myGuns[SlotFinder()] = 2;
+                
+                if (switchGun)
+                {
+                    currentGun = 2;
+                    Gun.instance.fireType = 2;
+                    Gun.instance.auto = true;
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[2];
+                    Fire.instance.fireRate = Fire.instance.rates[2];
+                    Fire.instance.ammoIndex = 2;
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[2];
+                    UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[2];
+                    UIHealthPanel.instance.name = "SMG: ";
+
+                }
+            }
+            UIHealthPanel.instance.UpdateAmmo();
+
         }
         if (collision.CompareTag("Better AR"))
         {
 
             //gunsOn[3] = true;
             Destroy(collision.gameObject);
-            Gun.instance.myGuns[SlotFinder()] = 3;
-            currentGun = 3;
+            
             if (AlreadyEquiped("Better AR"))
             {
                 Fire.instance.currentAmmo[3] = Fire.instance.startAmmo[3];
-                UIHealthPanel.instance.UpdateAmmo();
-                reload = true;
-
-
+                if (Gun.instance.fireType == 3)
+                {
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[3];
+                }
             }
+            else
+            {
+                Gun.instance.myGuns[SlotFinder()] = 3;
+               
+
+
+                if (switchGun)
+                {
+                    currentGun = 3;
+
+                    Gun.instance.fireType = 3;
+                    Gun.instance.auto = true;
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[3];
+                    Fire.instance.fireRate = Fire.instance.rates[3];
+                    Fire.instance.ammoIndex = 3;
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[3];
+                    UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[3];
+                    UIHealthPanel.instance.name = "AR: ";
+
+                }
+            }
+            UIHealthPanel.instance.UpdateAmmo();
+
         }
 
         if (collision.CompareTag("RPG"))
         {
-            //gunsOn[4] = true;
             Destroy(collision.gameObject);
-            currentGun = 4;
-            Gun.instance.myGuns[SlotFinder()] = 4;
             if (AlreadyEquiped("RPG"))
             {
                 Fire.instance.currentAmmo[4] = Fire.instance.startAmmo[4];
-                UIHealthPanel.instance.UpdateAmmo();
-                reload = true;
-
-
+                if (Gun.instance.fireType == 4)
+                {
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[4];
+                }
             }
+            else
+            {
+                Gun.instance.myGuns[SlotFinder()] = 4;
+                
+
+                if (switchGun)
+                {
+                    currentGun = 4;
+
+                    Gun.instance.fireType = 4;
+                    Gun.instance.auto = false;
+                    Gun.instance.sp.sprite = Gun.instance.difGuns[4];
+                    Fire.instance.fireRate = Fire.instance.rates[4];
+                    Fire.instance.ammoIndex = 4;
+                    UIHealthPanel.instance.ammo = Fire.instance.startAmmo[4];
+                    UIHealthPanel.instance.maxAmmo = Fire.instance.startAmmo[4];
+                    UIHealthPanel.instance.name = "RPG: ";
+                }
+            }
+            UIHealthPanel.instance.UpdateAmmo();
+    
         }
-        //Repress(Gun.instance.last);
 
 
 
     }
+    private bool switchGun = false;
+
     private int SlotFinder()
     {
+        // if no gun is equipped in the first slot
         if (!Gun.instance.first)
         {
             Gun.instance.first = true;
+            switchGun = false;
             return 0;
         }
+        // else if no gun is equipped in the second slot
         else if (!Gun.instance.second)
         {
             Gun.instance.second = true;
+            switchGun = false;
             return 1;
         }
-        else if (!Gun.instance.third)
-        {
-            Gun.instance.third = true;
-            return 2;
-        }
+  
+        // else go to the current slot
         else
         {
-            // then it should go to the equiped one
-            // the problem is the gun doesn't update till a button is pressed
-            print(currentGun);
-            // switch gun uses myguns which only has 3 max values
-            // so AR and RPG doesnt work
-            // want something that switches
-
-            // so switch all of it here
-            //Gun.instance.equipedGun = currentGun;
-            Gun.instance.fireType = currentGun;
-            Gun.instance.sp.sprite = Gun.instance.difGuns[currentGun];
-            //print(currentGun);
-            //foreach (int i in Gun.instance.myGuns)
-            //{
-            //    print(i);
-            //}
+     
+            print("Current Gun: " + currentGun);
+            switchGun = true;
             return Gun.instance.equipedGun;
         }
     }
@@ -428,7 +516,6 @@ public class PlayerController : MonoBehaviour
             // if it is a pistol and the gun just grabbed has pistol tag
             if (myGuns[i] == 0 && tag.Equals("Pistol"))
             {
-
                 return true;
             }
             if (myGuns[i] == 1 && tag.Equals("Shotgun"))
@@ -449,22 +536,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
-    }
-
-    void Repress(int last)
-    {
-        if(last == 1)
-        {
-            key1 = true;
-        }
-        if (last == 2)
-        {
-            key2 = true;
-        }
-        else
-        {
-            key3 = true;
-        }
     }
 
 }
