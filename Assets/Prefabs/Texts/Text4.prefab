@@ -78,5 +78,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: OK everything checks out! Remember your mission is to find the hive queen
-    and destroy her. Head down that hole and find her!
+  m_Text: OK everything checks out! Remember, you are our last line of defense and
+    your mission is to find the hive queen and destroy her. Head down that hole and
+    find her!
