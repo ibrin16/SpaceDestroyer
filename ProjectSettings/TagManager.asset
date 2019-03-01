@@ -18,6 +18,7 @@ TagManager:
   - BossAlien
   - GroundEgg
   - Missle
+  - Gun
   layers:
   - Default
   - TransparentFX

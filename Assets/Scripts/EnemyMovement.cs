@@ -126,7 +126,7 @@ public class EnemyMovement : MonoBehaviour
         Vector2 knockBackDir = collision.transform.position - transform.position;
         knockBackDir.Normalize();
         //look into this more
-        if (collision.CompareTag("Player") || collision.CompareTag("Pistol")) 
+        if (collision.CompareTag("Player") || collision.CompareTag("Gun")) 
         {
             PlayerInteraction.instance.Hit(damage);
             if(PlayerInteraction.instance.transform.position.x < transform.position.x)

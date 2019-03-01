@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 4974495224429785698}
   - component: {fileID: 1170758844301120515}
   - component: {fileID: 2861101517500478805}
-  - component: {fileID: 1892817548}
+  - component: {fileID: 5093027323293914842}
+  - component: {fileID: 3022690839743987290}
   m_Layer: 0
   m_Name: PistolPickup
-  m_TagString: Pistol
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +113,7 @@ MonoBehaviour:
   current: {fileID: 0}
   rates:
   - 0.3
-  - 1
+  - 1.2
   - 0.3
   - 0.2
   - 3
@@ -131,6 +132,13 @@ MonoBehaviour:
   - 0
   - 0
   ammoIndex: 0
+  sounds:
+  - {fileID: 8300000, guid: 2e33452fd9330b845841443f3f36c453, type: 3}
+  - {fileID: 8300000, guid: 8e139fb30f83d54408f95ed376497da9, type: 3}
+  - {fileID: 8300000, guid: 4ed85d757b98ad34bbfe9a43cc2f4d8b, type: 3}
+  - {fileID: 8300000, guid: 22686a84fa53b43649f9131ddaa220c7, type: 3}
+  - {fileID: 8300000, guid: 0ca2b9c98348a4b32b101b0063c4ee0f, type: 3}
+  - {fileID: 8300000, guid: 31bf48b8b700623468d12730eb5b5645, type: 3}
 --- !u!114 &2861101517500478805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +170,104 @@ MonoBehaviour:
   equipedGun: 0
   last: 0
   sp: {fileID: 0}
---- !u!58 &1892817548
-CircleCollider2D:
+--- !u!82 &5093027323293914842
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974495224429785696}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 22686a84fa53b43649f9131ddaa220c7, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!70 &3022690839743987290
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -176,5 +280,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.475
+  m_Size: {x: 0.95, y: 0.6}
+  m_Direction: 1

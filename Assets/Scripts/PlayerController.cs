@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     public SpriteRenderer sp;
     public Sprite[] sprites;
+    public AudioSource jumpSound;
     //public Sprite death;
     //public AudioClip jumpSound;
 
@@ -74,12 +75,13 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         gunsOn = false;
         moveable = true;
+        jumpSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        print(gunsOn);
+       // print(gunsOn);
         if (PlayerInteraction.instance.health > 0)
         {
 
@@ -140,7 +142,8 @@ public class PlayerController : MonoBehaviour
             //jump
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && PermissionToJump())
             {
-                //AudioSource.PlayClipAtPoint(jumpSound, transform.position);
+                jumpSound.Play(0);
+
                 vel = ApplyJump(vel);
 
             }
@@ -258,22 +261,24 @@ public class PlayerController : MonoBehaviour
         // maybe keep track of the last pressed number and then automatically press it again
         if (collision.CompareTag("Pistol"))
         {
-            if (gunsOn)
+            //if (gunsOn)
+            //{
+            print("here");
+            //gunsOn[0] = true;
+            Destroy(collision.gameObject);
+            Gun.instance.myGuns[0] = 0;
+            currentGun = 0;
+            if (AlreadyEquiped("Pistol"))
+            {
+                Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
+                UIHealthPanel.instance.UpdateAmmo();
+            }
+        }
+
+            //}
+            if (collision.CompareTag("Gun")) 
             {
                 print("here");
-                //gunsOn[0] = true;
-                Destroy(collision.gameObject);
-                Gun.instance.myGuns[0] = 0;
-                currentGun = 0;
-                if (AlreadyEquiped("Pistol"))
-                {
-                    Fire.instance.currentAmmo[0] = Fire.instance.startAmmo[0];
-                }
-
-
-            }
-            else
-            {
                 gunsOn = true;
                 equipedGun = collision.gameObject;
                 equipedGun.transform.SetParent(transform);
@@ -287,7 +292,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-        }
+        
         if (collision.CompareTag("Shotgun"))
         {
             //gunsOn[1] = true;
@@ -297,6 +302,8 @@ public class PlayerController : MonoBehaviour
             if (AlreadyEquiped("Shotgun"))
             {
                 Fire.instance.currentAmmo[1] = Fire.instance.startAmmo[1];
+                UIHealthPanel.instance.UpdateAmmo();
+
             }
         }
         if (collision.CompareTag("AR"))
@@ -308,6 +315,8 @@ public class PlayerController : MonoBehaviour
             if (AlreadyEquiped("AR"))
             {
                 Fire.instance.currentAmmo[2] = Fire.instance.startAmmo[2];
+                UIHealthPanel.instance.UpdateAmmo();
+
             }
         }
         if (collision.CompareTag("Better AR"))
@@ -320,6 +329,8 @@ public class PlayerController : MonoBehaviour
             if (AlreadyEquiped("Better AR"))
             {
                 Fire.instance.currentAmmo[3] = Fire.instance.startAmmo[3];
+                UIHealthPanel.instance.UpdateAmmo();
+
             }
         }
 
@@ -332,6 +343,8 @@ public class PlayerController : MonoBehaviour
             if (AlreadyEquiped("RPG"))
             {
                 Fire.instance.currentAmmo[4] = Fire.instance.startAmmo[4];
+                UIHealthPanel.instance.UpdateAmmo();
+
             }
         }
         //Repress(Gun.instance.last);

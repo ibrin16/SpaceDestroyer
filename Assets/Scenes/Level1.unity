@@ -2611,7 +2611,7 @@ PrefabInstance:
     - target: {fileID: 7819722401411629629, guid: a19e9e3f1ea4fc143b58c18e6a5047e5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 75
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 7819722401411629629, guid: a19e9e3f1ea4fc143b58c18e6a5047e5,
         type: 3}
@@ -4295,7 +4295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 74
+  m_RootOrder: 75
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &978071089
 PrefabInstance:
@@ -4920,8 +4920,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0409317, y: 0.07306397}
-  m_Size: {x: 1.0496597, y: 1.2747204}
+  m_Offset: {x: 0.0409317, y: 0.044394374}
+  m_Size: {x: 1.0496597, y: 1.3320596}
   m_Direction: 0
 --- !u!212 &1094576905
 SpriteRenderer:
@@ -78090,7 +78090,7 @@ Transform:
   m_Children:
   - {fileID: 1725298560}
   m_Father: {fileID: 0}
-  m_RootOrder: 73
+  m_RootOrder: 74
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966044921
 GameObject:

@@ -30,6 +30,11 @@ public class Fire : MonoBehaviour
     public float[] currentAmmo;
     public int ammoIndex;
 
+    private AudioSource audioPlay;
+    public AudioClip[] sounds;
+    private AudioClip currentSound;
+    private float shotguntimer;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -44,11 +49,14 @@ public class Fire : MonoBehaviour
 
     private void Start()
     {
+        audioPlay = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
+       
         if (PlayerController.instance.GetComponent<SpriteRenderer>().flipX)
         {
             fireSide = .75f;
@@ -64,6 +72,7 @@ public class Fire : MonoBehaviour
                 explosion = false;
                 fireRate = rates[0];
                 ammoIndex = 0;
+                currentSound = sounds[0];
                 
                 break;
 
@@ -72,6 +81,8 @@ public class Fire : MonoBehaviour
                 explosion = false;
                 fireRate = rates[1];
                 ammoIndex = 1;
+                currentSound = sounds[1];
+
 
                 break;
 
@@ -80,6 +91,7 @@ public class Fire : MonoBehaviour
                 explosion = false;
                 fireRate = rates[2];
                 ammoIndex = 2;
+                currentSound = sounds[3];
 
                 break;
 
@@ -88,6 +100,7 @@ public class Fire : MonoBehaviour
                 explosion = false;
                 fireRate = rates[3];
                 ammoIndex = 3;
+                currentSound = sounds[3];
 
                 break;
 
@@ -96,6 +109,7 @@ public class Fire : MonoBehaviour
                 explosion = true;
                 fireRate = rates[4];
                 ammoIndex = 4;
+                currentSound = sounds[4];
 
                 break;
         }
@@ -119,6 +133,10 @@ public class Fire : MonoBehaviour
             {
                 Singlefire();
             }
+            else
+            {
+                audioPlay.PlayOneShot(sounds[5]);
+            }
         }
 
     }
@@ -127,8 +145,7 @@ public class Fire : MonoBehaviour
     // also need to factor in fire rate
     public void Autofire()
     {
-        // this is broken
-        //StartCoroutine(autoFire());
+        audioPlay.PlayOneShot(currentSound);
         StartCoroutine(destrotyBlast());
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
@@ -148,7 +165,7 @@ public class Fire : MonoBehaviour
     // this needs to go in the correct direction
     public void Singlefire()
     {
-     
+        audioPlay.PlayOneShot(currentSound);
         Vector3 start = new Vector3(transform.position.x + fireSide, transform.position.y, 0);
         Projectile shot = Instantiate(current, start, Quaternion.identity);
         currentAmmo[ammoIndex] -= 1;
@@ -165,7 +182,8 @@ public class Fire : MonoBehaviour
 
             bottom = Instantiate(current, start, Quaternion.identity);
             bottom.yDir = -.25f;
-
+            // do the cocking noise
+            StartCoroutine(GunCock());    
 
 
         }
@@ -194,9 +212,15 @@ public class Fire : MonoBehaviour
         Destroy(blast.gameObject);
 
     }
-    public IEnumerator AutoFireCoroutine()
-    {
-        yield return new WaitForSeconds(fireRate);
+    //public IEnumerator AutoFireCoroutine()
+    //{
+    //    yield return new WaitForSeconds(fireRate);
         
+    //}
+
+    public IEnumerator GunCock()
+    {
+        yield return new WaitForSeconds(.5f);
+        audioPlay.PlayOneShot(sounds[2]);
     }
 }

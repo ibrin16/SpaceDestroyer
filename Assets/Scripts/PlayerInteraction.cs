@@ -81,12 +81,12 @@ public class PlayerInteraction : MonoBehaviour
                 // should check if enemy is too the left or to the right in order to decide which way to go
                 if (left)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(-20, 2, 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(-25, 4, 0);
 
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(20, 2, 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(25, 4, 0);
 
                 }
             }
