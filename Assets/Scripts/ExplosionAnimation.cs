@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Explosion animation script
+/// Purpose: Develops animation on explosion for each projectile
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

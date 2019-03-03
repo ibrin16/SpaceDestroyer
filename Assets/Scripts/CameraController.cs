@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Camera controller script
+/// Purpose: Allow the camera to move along with the player's
+/// movement by attaching the player transform object to this script
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// Some parts borrowed from Benno Lüders' code
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Dictates the spawning of the different weapons available in
+/// game using random probabilities.
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// </summary>
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

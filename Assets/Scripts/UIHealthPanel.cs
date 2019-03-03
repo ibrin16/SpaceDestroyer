@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Script to make changes to the UI panel 
+/// that includes player's health and weapon management.
+/// This script uses the singleton pattern that allows instantiation in 
+/// other scripts.
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// Some parts borrowed from Benno Lüders' code
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

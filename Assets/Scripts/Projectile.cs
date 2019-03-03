@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: This script is attached to all ammunitions and controls 
+/// instantiation and destruction when needed
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

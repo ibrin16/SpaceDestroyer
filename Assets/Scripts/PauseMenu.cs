@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Generate the pause menu and provide the interactive feature 
+/// associated with a menu item
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// Some parts borrowed from Benno Lüders' code
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

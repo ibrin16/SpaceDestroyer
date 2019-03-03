@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Script to control and define player movement, animation, physics,
+/// and shoot mechanism
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// Some parts borrowed from Benno Lüders' code
+/// </summary>
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

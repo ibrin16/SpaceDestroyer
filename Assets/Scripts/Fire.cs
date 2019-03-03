@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Script to control weapons pickup, fire, ammo reduction and switching and 
+/// all related sounds
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

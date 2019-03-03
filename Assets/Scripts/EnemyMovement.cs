@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Enemy Movement Script
+/// Purpose: Controls the movement features of the enemy objects including
+/// animation, knockback forces on hit and when to attack the player
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,14 +56,6 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        //print(boss);
-        //if (dead && boss)
-        //{
-        //    SceneManager.LoadScene("Win");
-
-        //}
-
         Vector2 direction = new Vector2(10, 0);
         Vector2 directionBack = new Vector2(-10, 0);
         Vector2 startPosition = transform.position;

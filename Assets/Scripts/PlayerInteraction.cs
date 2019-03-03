@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/// <summary>
+/// Purpose: Controls all of the interactive elements associated with the player
+/// including weapons pickup, damage update, and game restarting when health = 0
+/// Written by: Isacc Brinkman and Daya Shrestha
+/// Game Development: Programming and Practice B
+/// DIS, Spring 2019
+/// Some parts borrowed from Benno Lüders' code
+/// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
