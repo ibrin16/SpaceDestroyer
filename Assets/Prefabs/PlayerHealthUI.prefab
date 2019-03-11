@@ -327,6 +327,8 @@ MonoBehaviour:
   UIImage: {fileID: 5729950701788386160}
   ammoText: {fileID: 1970064557}
   gunText: {fileID: 5729950703374246572}
+  ammo: 0
+  maxAmmo: 0
 --- !u!1 &5729950703316293859
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +598,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5729950703444977183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596aed03cfdf56c46abafe297f7cd2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: ba79d3c7c425243a3a8cb4d846626048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5729950703556348008
